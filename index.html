@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abu Talha Nasir Khan — Business Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0e12;
+    --surface: #13161c;
+    --border: rgba(255,255,255,0.07);
+    --gold: #c9a84c;
+    --gold-dim: rgba(201,168,76,0.15);
+    --text: #e8e3da;
+    --muted: #7a7670;
+    --white: #f5f1ea;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(12,14,18,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: padding .3s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: .2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: .75rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 6rem 4rem 4rem;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridFade 4s ease forwards;
+  }
+  @keyframes gridFade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,.08) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    text-align: center;
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    font-size: .7rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp .8s .3s ease forwards;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: -.02em;
+    opacity: 0;
+    animation: fadeUp .9s .5s ease forwards;
+  }
+  .hero-name span { color: var(--gold); }
+  .hero-title {
+    margin-top: 1rem;
+    font-size: 1rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeUp .9s .7s ease forwards;
+  }
+  .hero-summary {
+    margin-top: 2rem;
+    max-width: 560px;
+    margin-left: auto; margin-right: auto;
+    font-size: .95rem;
+    color: rgba(232,227,218,.65);
+    opacity: 0;
+    animation: fadeUp .9s .9s ease forwards;
+  }
+  .hero-cta {
+    margin-top: 2.8rem;
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp .9s 1.1s ease forwards;
+  }
+  .btn {
+    display: inline-block;
+    padding: .7rem 2rem;
+    border-radius: 2px;
+    font-size: .75rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: all .25s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-gold {
+    background: var(--gold);
+    color: #0c0e12;
+    font-weight: 500;
+  }
+  .btn-gold:hover { background: #e0bc5e; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 6rem 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: .68rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: .6rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 3rem;
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── STATS ROW ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 0 auto 4rem;
+    max-width: 1000px;
+  }
+  .stat-cell {
+    background: var(--surface);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: .4rem;
+  }
+
+  /* ── SKILLS GRID ── */
+  .skills-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  .skill-group-title {
+    font-size: .7rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-bar-item { margin-bottom: 1.2rem; }
+  .skill-bar-top {
+    display: flex; justify-content: space-between;
+    font-size: .8rem;
+    color: var(--text);
+    margin-bottom: .4rem;
+  }
+  .skill-bar-bg {
+    height: 2px;
+    background: var(--border);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .skill-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), #e0bc5e);
+    border-radius: 1px;
+    width: 0;
+    transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  }
+  .tags-list {
+    display: flex; flex-wrap: wrap; gap: .5rem;
+  }
+  .tag {
+    font-size: .72rem;
+    padding: .35rem .85rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--muted);
+    letter-spacing: .06em;
+    transition: all .2s;
+  }
+  .tag:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── EXPERIENCE TIMELINE ── */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-item {
+    padding-left: 2.5rem;
+    padding-bottom: 3.5rem;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .6s, transform .6s;
+  }
+  .tl-item.visible { opacity: 1; transform: translateY(0); }
+  .tl-dot {
+    position: absolute;
+    left: -4px; top: .45rem;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 1px solid var(--bg);
+  }
+  .tl-meta {
+    display: flex; justify-content: space-between; align-items: baseline;
+    flex-wrap: wrap; gap: .5rem;
+    margin-bottom: .5rem;
+  }
+  .tl-org {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--white);
+  }
+  .tl-date {
+    font-size: .72rem;
+    letter-spacing: .1em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .tl-role {
+    font-size: .8rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .tl-bullets { list-style: none; }
+  .tl-bullets li {
+    font-size: .88rem;
+    color: rgba(232,227,218,.7);
+    padding-left: 1.2rem;
+    position: relative;
+    margin-bottom: .55rem;
+  }
+  .tl-bullets li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--gold);
+    font-size: .75rem;
+  }
+  .tl-bullets strong { color: var(--text); font-weight: 500; }
+
+  /* ── EDUCATION ── */
+  .edu-grid { display: grid; gap: 1.5rem; }
+  .edu-card {
+    border: 1px solid var(--border);
+    padding: 1.8rem 2rem;
+    background: var(--surface);
+    border-radius: 2px;
+    transition: border-color .25s;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity .6s, transform .6s, border-color .25s;
+  }
+  .edu-card.visible { opacity: 1; transform: translateY(0); }
+  .edu-card:hover { border-color: var(--gold); }
+  .edu-card-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: .5rem;
+    margin-bottom: .8rem;
+  }
+  .edu-inst {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: var(--white);
+  }
+  .edu-date {
+    font-size: .7rem;
+    color: var(--gold);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .edu-degree {
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin-bottom: .9rem;
+  }
+  .edu-bullets { list-style: none; }
+  .edu-bullets li {
+    font-size: .85rem;
+    color: rgba(232,227,218,.65);
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: .4rem;
+  }
+  .edu-bullets li::before {
+    content: '·';
+    position: absolute; left: 0;
+    color: var(--gold);
+  }
+
+  /* ── CERTS ── */
+  .cert-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .cert-card {
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    background: var(--surface);
+    border-radius: 2px;
+    transition: border-color .25s;
+  }
+  .cert-card:hover { border-color: var(--gold); }
+  .cert-icon {
+    font-size: 1.4rem;
+    margin-bottom: .8rem;
+  }
+  .cert-name {
+    font-size: .82rem;
+    color: var(--text);
+    margin-bottom: .3rem;
+    font-weight: 400;
+  }
+  .cert-issuer {
+    font-size: .7rem;
+    color: var(--muted);
+    letter-spacing: .08em;
+  }
+
+  /* ── CONTACT FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 4rem;
+    text-align: center;
+  }
+  .contact-grid {
+    display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .contact-item {
+    text-decoration: none;
+    font-size: .75rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color .2s;
+    display: flex; flex-direction: column; align-items: center; gap: .4rem;
+  }
+  .contact-item .ci-label { color: var(--gold); font-size: .65rem; }
+  .contact-item:hover { color: var(--white); }
+  .footer-copy {
+    font-size: .68rem;
+    color: var(--muted);
+    letter-spacing: .1em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 5rem 1.5rem 3rem; }
+    .stats-row { grid-template-columns: 1fr; }
+    .skills-container { grid-template-columns: 1fr; gap: 2rem; }
+    .tl-meta { flex-direction: column; }
+    .contact-grid { flex-direction: column; align-items: center; gap: 1.5rem; }
+    footer { padding: 3rem 1.5rem; }
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ATN Khan</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="max-width:100%; padding-top:0; padding-bottom:0;">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Business Analyst · ISB · CFA Level I Passed</p>
+    <h1 class="hero-name">Abu <span>Talha</span><br>Nasir Khan</h1>
+    <p class="hero-title">Data-Driven Strategy · Business Intelligence · Financial Analysis</p>
+    <p class="hero-summary">
+      Business Analyst at the Indian School of Business with a strong foundation in data analytics, financial modelling, and machine learning — translating complex data into clear strategic decisions.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-gold">View Work</a>
+      <a href="mailto:abutalha.khan53@gmail.com" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-cell">
+    <span class="stat-num" data-target="95">0</span><span class="stat-num">%</span>
+    <span class="stat-label">Reporting Time Saved</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num">₹400<span style="font-size:1.4rem">Cr</span></span>
+    <span class="stat-label">Compensation Tracked</span>
+  </div>
+  <div class="stat-cell">
+    <span class="stat-num" data-target="30">0</span><span class="stat-num">%</span>
+    <span class="stat-label">ML Error Reduction</span>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Career</p>
+  <h2 class="section-title">Professional<br>Experience</h2>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">
+        <span class="tl-org">Indian School of Business</span>
+        <span class="tl-date">2025 — Present</span>
+      </div>
+      <p class="tl-role">Business Analyst · Management Trainee · Hyderabad, India</p>
+      <ul class="tl-bullets">
+        <li>Partnered with senior stakeholders to analyse mixed-method survey data via A/B testing, statistical modelling, and text pattern recognition, delivering strategic insights via PowerPoint <strong>within a rapid 40-hour turnaround</strong>.</li>
+        <li>Architected an automated Power BI dashboard via Salesforce and Foreign Exchange API integrations to track <strong>₹400Cr in compensation</strong>, slashing reporting time by <strong>95% (60 → 3 hours)</strong> and maintaining 100% system uptime for 6 months.</li>
+        <li>Engineered an end-to-end ML salary prediction model and automated data ingestion pipeline via API, utilising advanced feature engineering to <strong>reduce Type I targeting errors by 30%</strong>.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider" style="max-width:1000px;margin:0 auto;"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Capabilities</p>
+  <h2 class="section-title">Skills &amp;<br>Expertise</h2>
+
+  <div class="skills-container">
+    <div>
+      <p class="skill-group-title">Core Competencies</p>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span>Data Analysis &amp; Reporting</span><span>92%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span>Dashboard Development (Power BI)</span><span>85%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span>Financial Modelling &amp; Analysis</span><span>88%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span>Python &amp; SQL</span><span>87%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="87"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-top"><span>Machine Learning Applications</span><span>78%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div>
+      </div>
+    </div>
+
+    <div>
+      <p class="skill-group-title">Tools &amp; Platforms</p>
+      <div class="tags-list" style="margin-bottom:2rem;">
+        <span class="tag">Excel</span>
+        <span class="tag">PowerPoint</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">Salesforce</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">Git</span>
+        <span class="tag">Jira</span>
+      </div>
+
+      <p class="skill-group-title">Domain Knowledge</p>
+      <div class="tags-list">
+        <span class="tag">A/B Testing</span>
+        <span class="tag">Data Pipelines</span>
+        <span class="tag">Feature Engineering</span>
+        <span class="tag">DCF / NPV</span>
+        <span class="tag">Stakeholder Management</span>
+        <span class="tag">Strategic Analysis</span>
+        <span class="tag">Financial Modelling</span>
+        <span class="tag">Research</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="max-width:1000px;margin:0 auto;"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Background</p>
+  <h2 class="section-title">Education</h2>
+
+  <div class="edu-grid">
+
+    <div class="edu-card">
+      <div class="edu-card-top">
+        <span class="edu-inst">Jamia Millia Islamia</span>
+        <span class="edu-date">2023 — 2025</span>
+      </div>
+      <p class="edu-degree">MBA: Finance · New Delhi, India</p>
+      <ul class="edu-bullets">
+        <li>Feasibility analysis for a ₹900Cr+ project using CCA, DCF, and NPV models in Excel.</li>
+        <li>Won 1st place in a business case competition — AI/ML-enabled gamified coaching platform with a 5-year financial & market strategy.</li>
+        <li>Analysed an ESG-augmented Fama-French 5-factor model; identified Governance factors as significant predictors.</li>
+      </ul>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-card-top">
+        <span class="edu-inst">Aligarh Muslim University</span>
+        <span class="edu-date">2020 — 2023</span>
+      </div>
+      <p class="edu-degree">BSc Mathematics with Statistics · Aligarh, UP, India</p>
+      <ul class="edu-bullets">
+        <li>Strong foundation in statistical analysis, A/B testing, hypothesis testing, and statistical significance analysis.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider" style="max-width:1000px;margin:0 auto;"></div>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <p class="section-label">Credentials</p>
+  <h2 class="section-title">Certifications</h2>
+
+  <div class="cert-row">
+    <div class="cert-card">
+      <div class="cert-icon">🏆</div>
+      <p class="cert-name">CFA® Level I — Passed (90+ Percentile)</p>
+      <p class="cert-issuer">CFA Institute · February 2026</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📈</div>
+      <p class="cert-name">CFA® Level II Candidate</p>
+      <p class="cert-issuer">CFA Institute · November 2026</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🤖</div>
+      <p class="cert-name">Supervised Machine Learning: Regression &amp; Classification</p>
+      <p class="cert-issuer">Stanford Online</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🐼</div>
+      <p class="cert-name">Advanced Pandas</p>
+      <p class="cert-issuer">LinkedIn Learning</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📊</div>
+      <p class="cert-name">Power BI</p>
+      <p class="cert-issuer">Datacamp</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / FOOTER -->
+<footer id="contact">
+  <p class="section-label" style="margin-bottom:1.5rem;">Get In Touch</p>
+  <div class="contact-grid">
+    <a class="contact-item" href="mailto:abutalha.khan53@gmail.com">
+      <span class="ci-label">Email</span>
+      <span>abutalha.khan53@gmail.com</span>
+    </a>
+    <a class="contact-item" href="tel:+916395332478">
+      <span class="ci-label">Phone</span>
+      <span>+91 6395332478</span>
+    </a>
+    <a class="contact-item" href="#">
+      <span class="ci-label">Location</span>
+      <span>Hyderabad, India</span>
+    </a>
+  </div>
+  <p class="footer-copy">© 2025 Abu Talha Nasir Khan · All rights reserved</p>
+</footer>
+
+<script>
+  // Animate skill bars when in view
+  const bars = document.querySelectorAll('.skill-bar-fill');
+  const statsNums = document.querySelectorAll('.stat-num[data-target]');
+  const tlItems = document.querySelectorAll('.tl-item, .edu-card');
+
+  const animateCounter = (el) => {
+    const target = +el.dataset.target;
+    let count = 0;
+    const step = target / 50;
+    const timer = setInterval(() => {
+      count = Math.min(count + step, target);
+      el.textContent = Math.round(count);
+      if (count >= target) clearInterval(timer);
+    }, 28);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      if (el.classList.contains('skill-bar-fill')) {
+        el.style.width = el.dataset.width + '%';
+      }
+      if (el.dataset.target) animateCounter(el);
+      if (el.classList.contains('tl-item') || el.classList.contains('edu-card')) {
+        el.classList.add('visible');
+      }
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.2 });
+
+  bars.forEach(b => observer.observe(b));
+  statsNums.forEach(n => observer.observe(n));
+  tlItems.forEach(t => observer.observe(t));
+</script>
+</body>
+</html>
