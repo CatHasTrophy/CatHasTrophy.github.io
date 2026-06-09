@@ -164,32 +164,38 @@
   }
   .tag:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* ── EXPERIENCE TIMELINE ── */
-  .timeline { position: relative; }
-  .timeline::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 1px; background: var(--border);
+  /* ── JOURNEY MAP TIMELINE (EXPERIENCE & EDUCATION) ── */
+  .journey-map { position: relative; padding-left: 20px; }
+  .journey-map::before {
+    content: ''; position: absolute; left: 0; top: 20px; bottom: 20px;
+    width: 2px; background: repeating-linear-gradient(to bottom, var(--gold) 0, var(--gold) 6px, transparent 6px, transparent 12px);
   }
   .tl-item {
-    padding-left: 2.5rem; padding-bottom: 3.5rem; position: relative;
+    padding-left: 2rem; padding-bottom: 4rem; position: relative;
     opacity: 0; transform: translateY(20px); transition: opacity .6s, transform .6s;
   }
   .tl-item.visible { opacity: 1; transform: translateY(0); }
   .tl-dot {
-    position: absolute; left: -4px; top: .45rem;
-    width: 9px; height: 9px; border-radius: 50%;
-    background: var(--gold); border: 1px solid var(--bg);
+    position: absolute; left: -7px; top: 1.8rem;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--gold);
+    box-shadow: 0 0 10px var(--gold-dim);
+  }
+  .journey-location {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: #e0bc5e; margin-bottom: 0.8rem; display: inline-flex; align-items: center;
+    background: var(--surface); padding: 0.35rem 1rem; border: 1px solid rgba(201,168,76,0.3); border-radius: 20px;
   }
   .tl-meta { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .5rem; margin-bottom: .5rem; }
-  .tl-org { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--white); }
-  .tl-date { font-size: .72rem; letter-spacing: .1em; color: var(--gold); text-transform: uppercase; }
-  .tl-role { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .tl-org { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--white); }
+  .tl-date { font-size: .75rem; letter-spacing: .1em; color: var(--gold); text-transform: uppercase; }
+  .tl-role { font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
   .tl-bullets { list-style: none; }
   .tl-bullets li { font-size: .88rem; color: rgba(232,227,218,.7); padding-left: 1.2rem; position: relative; margin-bottom: .55rem; }
   .tl-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: .75rem; }
   .tl-bullets strong { color: var(--text); font-weight: 500; }
 
-  /* ── EDUCATION ── */
+  /* ── PROJECTS / CARDS ── */
   .edu-grid { display: grid; gap: 1.5rem; }
   .edu-card {
     border: 1px solid var(--border); padding: 1.8rem 2rem;
@@ -606,10 +612,11 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">ATN Khan</div>
+  <div class="nav-logo">Abu Talha</div>
   <ul class="nav-links">
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#certifications">Certifications</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -621,15 +628,15 @@
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-inner">
-    <p class="hero-eyebrow">Business Analyst · ISB · CFA Level I Passed</p>
-    <h1 class="hero-name">Abu <span>Talha</span><br>Nasir Khan</h1>
+    <p class="hero-eyebrow">Business Analyst · ISB · CFA Level I Passed[cite: 1]</p>
+    <h1 class="hero-name">Abu <span>Talha</span><br>Nasir Khan[cite: 1]</h1>
     <p class="hero-title">Data-Driven Strategy · Business Intelligence · Financial Analysis</p>
     <p class="hero-summary">
       Business Analyst at the Indian School of Business with a strong foundation in data analytics, financial modelling, and machine learning — translating complex data into clear strategic decisions.
     </p>
     <div class="hero-cta">
       <a href="#experience" class="btn btn-gold">View Work</a>
-      <a href="mailto:abutalha.khan53@gmail.com" class="btn btn-outline">Get In Touch</a>
+      <a href="mailto:abutalha.khan53@gmail.com" class="btn btn-outline">Get In Touch[cite: 1]</a>
     </div>
   </div>
 </section>
@@ -638,36 +645,55 @@
 <div class="stats-row">
   <div class="stat-cell">
     <span class="stat-num" data-target="95">0</span><span class="stat-num">%</span>
-    <span class="stat-label">Reporting Time Saved</span>
+    <span class="stat-label">Reporting Time Saved[cite: 1]</span>
   </div>
   <div class="stat-cell">
     <span class="stat-num">₹400<span style="font-size:1.4rem">Cr</span></span>
-    <span class="stat-label">Compensation Tracked</span>
+    <span class="stat-label">Compensation Tracked[cite: 1]</span>
   </div>
   <div class="stat-cell">
     <span class="stat-num" data-target="30">0</span><span class="stat-num">%</span>
-    <span class="stat-label">ML Error Reduction</span>
+    <span class="stat-label">ML Error Reduction[cite: 1]</span>
   </div>
 </div>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <p class="section-label">Career</p>
-  <h2 class="section-title">Professional<br>Experience</h2>
-  <div class="timeline">
+  <p class="section-label">Career Path</p>
+  <h2 class="section-title">Professional<br>Journey</h2>
+  <div class="journey-map">
+
+    <!-- Role 1 -->
     <div class="tl-item">
       <div class="tl-dot"></div>
+      <div class="journey-location">📍 Delhi NCR / Gurgaon, India</div>
       <div class="tl-meta">
-        <span class="tl-org">Indian School of Business</span>
-        <span class="tl-date">2025 — Present</span>
+        <span class="tl-org">Outlook Publishing Pvt Ltd.[cite: 1]</span>
+        <span class="tl-date">2024[cite: 1]</span>
       </div>
-      <p class="tl-role">Business Analyst · Management Trainee · Hyderabad, India</p>
+      <p class="tl-role">Business Analyst Intern[cite: 1]</p>
       <ul class="tl-bullets">
-        <li>Partnered with senior stakeholders to analyse mixed-method survey data via A/B testing, statistical modelling, and text pattern recognition, delivering strategic insights via PowerPoint <strong>within a rapid 40-hour turnaround</strong>.</li>
-        <li>Architected an automated Power BI dashboard via Salesforce and Foreign Exchange API integrations to track <strong>₹400Cr in compensation</strong>, slashing reporting time by <strong>95% (60 → 3 hours)</strong> and maintaining 100% system uptime for 6 months.</li>
-        <li>Engineered an end-to-end ML salary prediction model and automated data ingestion pipeline via API, utilising advanced feature engineering to <strong>reduce Type I targeting errors by 30%</strong>.</li>
+        <li>Evaluated macroeconomic drivers and competitive dynamics within the media and publishing sector to analyze, model, and forecast long-term market size ($30 Billion) and its contraction trends.[cite: 1]</li>
       </ul>
     </div>
+
+    <!-- Role 2 -->
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="journey-location">📍 Hyderabad, India</div>
+      <div class="tl-meta">
+        <span class="tl-org">Indian School of Business[cite: 1]</span>
+        <span class="tl-date">2025 — Present[cite: 1]</span>
+      </div>
+      <p class="tl-role">Business Strategy Analyst (Management Trainee)[cite: 1]</p>
+      <ul class="tl-bullets">
+        <li>Architected automated Power BI dashboards via Salesforce and Foreign Exchange API integrations to track ₹400Cr in compensation, ensuring 100% data integrity and slashing reporting time by 95% (from 60 to 3 hours).[cite: 1]</li>
+        <li>Engineered quantitative ML prediction models and automated data pipelines; performed rigorous root cause analysis on data discrepancies to map model risks, reducing targeting errors by 30%.[cite: 1]</li>
+        <li>Conducted comprehensive reviews of unstructured process documents, deploying NLP sentiment analysis (NLTK, scikit-learn) to extract qualitative insights and augment data pipelines.[cite: 1]</li>
+        <li>Conducted financial feasibility analysis for a ₹50Cr+ project; built robust DCF and NPV models, integrating Monte Carlo simulations and variance analysis for operational risk management.[cite: 1]</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
@@ -679,9 +705,9 @@
   <h2 class="section-title">Skills &amp;<br>Expertise</h2>
   <div class="skills-container">
     <div>
-      <p class="skill-group-title">Core Competencies</p>
+      <p class="skill-group-title">Core Competencies[cite: 1]</p>
       <div class="skill-bar-item">
-        <div class="skill-bar-top"><span>Data Analysis &amp; Reporting</span><span>92%</span></div>
+        <div class="skill-bar-top"><span>Data Analysis &amp; Automation</span><span>92%</span></div>
         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92"></div></div>
       </div>
       <div class="skill-bar-item">
@@ -689,23 +715,23 @@
         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div>
       </div>
       <div class="skill-bar-item">
-        <div class="skill-bar-top"><span>Financial Modelling &amp; Analysis</span><span>88%</span></div>
+        <div class="skill-bar-top"><span>Financial Modeling (DCF, NPV)</span><span>88%</span></div>
         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div>
       </div>
       <div class="skill-bar-item">
-        <div class="skill-bar-top"><span>Python &amp; SQL</span><span>87%</span></div>
+        <div class="skill-bar-top"><span>Python (Advanced Pandas) &amp; SQL</span><span>87%</span></div>
         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="87"></div></div>
       </div>
       <div class="skill-bar-item">
-        <div class="skill-bar-top"><span>Machine Learning Applications</span><span>78%</span></div>
+        <div class="skill-bar-top"><span>Statistical Modeling &amp; ML</span><span>78%</span></div>
         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div>
       </div>
     </div>
     <div>
-      <p class="skill-group-title">Tools &amp; Platforms</p>
+      <p class="skill-group-title">Tools &amp; Platforms[cite: 1]</p>
       <div class="tags-list" style="margin-bottom:2rem;">
-        <span class="tag">Excel</span>
-        <span class="tag">PowerPoint</span>
+        <span class="tag">Excel (VBA, Power Query)</span>
+        <span class="tag">Bloomberg</span>
         <span class="tag">Python</span>
         <span class="tag">Power BI</span>
         <span class="tag">Salesforce</span>
@@ -713,17 +739,45 @@
         <span class="tag">Git</span>
         <span class="tag">Jira</span>
       </div>
-      <p class="skill-group-title">Domain Knowledge</p>
+      <p class="skill-group-title">Domain Knowledge[cite: 1]</p>
       <div class="tags-list">
-        <span class="tag">A/B Testing</span>
-        <span class="tag">Data Pipelines</span>
-        <span class="tag">Feature Engineering</span>
+        <span class="tag">Reference Data Management</span>
+        <span class="tag">Security Master Setup</span>
+        <span class="tag">Root Cause Analysis</span>
         <span class="tag">DCF / NPV</span>
-        <span class="tag">Stakeholder Management</span>
+        <span class="tag">Variance &amp; Sensitivity Analysis</span>
         <span class="tag">Strategic Analysis</span>
-        <span class="tag">Financial Modelling</span>
-        <span class="tag">Research</span>
+        <span class="tag">Financial Modeling</span>
+        <span class="tag">Portfolio Management</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="max-width:1000px;margin:0 auto;"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Portfolio</p>
+  <h2 class="section-title">Projects</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-card-top">
+        <span class="edu-inst">Competitor Analysis Report (Leather Industry)[cite: 1]</span>
+        <span class="edu-date">2024[cite: 1]</span>
+      </div>
+      <ul class="edu-bullets">
+        <li>Analyzed a 3% decline in EBITDA and PAT driven by a 5% COGS increase, while assessing market risk (beta 1.2) and benchmarking against competitor Sreeleathers' growth.[cite: 1]</li>
+      </ul>
+    </div>
+    <div class="edu-card">
+      <div class="edu-card-top">
+        <span class="edu-inst">Comprehensive Financial Modeling and Reporting (Tata Motors)[cite: 1]</span>
+        <span class="edu-date">2023[cite: 1]</span>
+      </div>
+      <ul class="edu-bullets">
+        <li>Built a Tata Motors financial model (DCF, comps) with 95% forecasting accuracy, projecting 8% 5-year revenue growth.[cite: 1]</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -732,31 +786,39 @@
 
 <!-- EDUCATION -->
 <section id="education">
-  <p class="section-label">Background</p>
-  <h2 class="section-title">Education</h2>
-  <div class="edu-grid">
-    <div class="edu-card">
-      <div class="edu-card-top">
-        <span class="edu-inst">Jamia Millia Islamia</span>
-        <span class="edu-date">2023 — 2025</span>
+  <p class="section-label">Academic Background</p>
+  <h2 class="section-title">Education<br>Journey</h2>
+  <div class="journey-map">
+
+    <!-- Edu 1 -->
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="journey-location">📍 Aligarh, Uttar Pradesh, India</div>
+      <div class="tl-meta">
+        <span class="tl-org">Aligarh Muslim University[cite: 1]</span>
+        <span class="tl-date">2020 — 2023[cite: 1]</span>
       </div>
-      <p class="edu-degree">MBA: Finance · New Delhi, India</p>
-      <ul class="edu-bullets">
-        <li>Feasibility analysis for a ₹900Cr+ project using CCA, DCF, and NPV models in Excel.</li>
-        <li>Won 1st place in a business case competition — AI/ML-enabled gamified coaching platform with a 5-year financial &amp; market strategy.</li>
-        <li>Analysed an ESG-augmented Fama-French 5-factor model; identified Governance factors as significant predictors.</li>
+      <p class="tl-role">Bachelor of Science in Mathematics with Statistics[cite: 1]</p>
+      <ul class="tl-bullets">
+        <li>Built a strong foundation in statistical analysis during undergraduate studies.[cite: 1]</li>
       </ul>
     </div>
-    <div class="edu-card">
-      <div class="edu-card-top">
-        <span class="edu-inst">Aligarh Muslim University</span>
-        <span class="edu-date">2020 — 2023</span>
+
+    <!-- Edu 2 -->
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="journey-location">📍 New Delhi, India</div>
+      <div class="tl-meta">
+        <span class="tl-org">Jamia Millia Islamia[cite: 1]</span>
+        <span class="tl-date">2023 — 2025[cite: 1]</span>
       </div>
-      <p class="edu-degree">BSc Mathematics with Statistics · Aligarh, UP, India</p>
-      <ul class="edu-bullets">
-        <li>Strong foundation in statistical analysis, A/B testing, hypothesis testing, and statistical significance analysis.</li>
+      <p class="tl-role">MBA: Finance[cite: 1]</p>
+      <ul class="tl-bullets">
+        <li>Analyzed an ESG-augmented Fama-French 5-factor model through data cleaning and statistical analysis, identifying Governance factors as significant predictors.[cite: 1]</li>
+        <li>Secured 1st place in a national business case competition by designing an AI/ML-enabled platform backed by a comprehensive 5-year financial forecast and market strategy.[cite: 1]</li>
       </ul>
     </div>
+
   </div>
 </section>
 
@@ -772,14 +834,14 @@
   <!-- ── CFA HERO ── -->
   <div class="cfa-hero" id="cfaHero">
     <div class="cfa-hero-left">
-      <div class="cfa-passed-badge">Passed · February 2026</div>
-      <p class="cfa-institute-label">CFA Institute</p>
-      <h3 class="cfa-card-title">Chartered Financial<br>Analyst — <em>Level I Passed</em></h3>
+      <div class="cfa-passed-badge">Passed · February 2026[cite: 1]</div>
+      <p class="cfa-institute-label">CFA Institute[cite: 1]</p>
+      <h3 class="cfa-card-title">Chartered Financial<br>Analyst — <em>Level I Passed[cite: 1]</em></h3>
       <p class="cfa-description">
         Studied bond valuation, duration &amp; convexity, equity analysis, discounted cash flow
         models, derivatives pricing, real estate &amp; alternative investments, code of ethics
         &amp; professional standards, and quantitative methods including time value of money
-        and hypothesis testing — across the Level I curriculum
+        and hypothesis testing — across the Level I curriculum.
       </p>
       <div class="cfa-actions">
         <button class="btn btn-gold"
@@ -792,7 +854,7 @@
         <div class="cfa-l2-indicator">
           <span class="cfa-l2-dot"></span>
         </div>
-        <span class="cfa-l2-copy">CFA Level II Candidate &mdash; Sitting November 2026</span>
+        <span class="cfa-l2-copy">CFA Level II Candidate &mdash; Sitting November 2026[cite: 1]</span>
       </div>
     </div>
 
@@ -810,7 +872,7 @@
 
   <!-- ── OTHER CERTS ── -->
   <div class="other-certs-header">
-    <span class="other-certs-header-label">Additional Credentials</span>
+    <span class="other-certs-header-label">Additional Credentials[cite: 1]</span>
     <div class="other-certs-header-line"></div>
     <span class="other-certs-header-label">Hover to view</span>
   </div>
@@ -822,8 +884,8 @@
       <div class="cert-flip-inner">
         <div class="cert-flip-front">
           <span class="cert-flip-icon">📊</span>
-          <p class="cert-flip-name">Bloomberg Market Concepts</p>
-          <p class="cert-flip-issuer">Bloomberg</p>
+          <p class="cert-flip-name">Bloomberg Market Concepts[cite: 1]</p>
+          <p class="cert-flip-issuer">Bloomberg[cite: 1]</p>
         </div>
         <div class="cert-flip-back">
           <span class="cert-flip-cta">View<br>Certificate</span>
@@ -837,8 +899,8 @@
       <div class="cert-flip-inner">
         <div class="cert-flip-front">
           <span class="cert-flip-icon">🤖</span>
-          <p class="cert-flip-name">Supervised Machine Learning</p>
-          <p class="cert-flip-issuer">Stanford Online · Regression &amp; Classification</p>
+          <p class="cert-flip-name">Supervised Machine Learning[cite: 1]</p>
+          <p class="cert-flip-issuer">Stanford Online[cite: 1]</p>
         </div>
         <div class="cert-flip-back">
           <span class="cert-flip-cta">View<br>Certificate</span>
@@ -851,9 +913,9 @@
          onclick="openCertModal('assets/certs/PowerBI.pdf', 'pdf', 'Power BI — Datacamp')">
       <div class="cert-flip-inner">
         <div class="cert-flip-front">
-          <span class="cert-flip-icon">📊</span>
-          <p class="cert-flip-name">Power BI</p>
-          <p class="cert-flip-issuer">Datacamp</p>
+          <span class="cert-flip-icon">📈</span>
+          <p class="cert-flip-name">Power BI[cite: 1]</p>
+          <p class="cert-flip-issuer">Datacamp[cite: 1]</p>
         </div>
         <div class="cert-flip-back">
           <span class="cert-flip-cta">View<br>Certificate</span>
@@ -867,23 +929,8 @@
       <div class="cert-flip-inner">
         <div class="cert-flip-front">
           <span class="cert-flip-icon">🐼</span>
-          <p class="cert-flip-name">Advanced Pandas</p>
-          <p class="cert-flip-issuer">LinkedIn Learning</p>
-        </div>
-        <div class="cert-flip-back">
-          <span class="cert-flip-cta">View<br>Certificate</span>
-          <span class="cert-flip-arrow">→</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="cert-flip-card" tabindex="0" role="button" aria-label="View Git and GitHub certificate"
-         onclick="openCertModal('assets/certs/Git_and_GitHub.pdf', 'pdf', 'Git &amp; GitHub — LinkedIn Learning')">
-      <div class="cert-flip-inner">
-        <div class="cert-flip-front">
-          <span class="cert-flip-icon">🐙</span>
-          <p class="cert-flip-name">Git &amp; GitHub</p>
-          <p class="cert-flip-issuer">LinkedIn Learning</p>
+          <p class="cert-flip-name">Advanced Pandas[cite: 1]</p>
+          <p class="cert-flip-issuer">LinkedIn Learning[cite: 1]</p>
         </div>
         <div class="cert-flip-back">
           <span class="cert-flip-cta">View<br>Certificate</span>
@@ -916,19 +963,19 @@
   <p class="section-label" style="margin-bottom:1.5rem;">Get In Touch</p>
   <div class="contact-grid">
     <a class="contact-item" href="mailto:abutalha.khan53@gmail.com">
-      <span class="ci-label">Email</span>
-      <span>abutalha.khan53@gmail.com</span>
+      <span class="ci-label">Email[cite: 1]</span>
+      <span>abutalha.khan53@gmail.com[cite: 1]</span>
     </a>
     <a class="contact-item" href="tel:+916395332478">
-      <span class="ci-label">Phone</span>
-      <span>+91 6395332478</span>
+      <span class="ci-label">Phone[cite: 1]</span>
+      <span>+91 6395332478[cite: 1]</span>
     </a>
     <a class="contact-item" href="#">
-      <span class="ci-label">Location</span>
-      <span>Hyderabad, India</span>
+      <span class="ci-label">Location[cite: 1]</span>
+      <span>Hyderabad, India[cite: 1]</span>
     </a>
   </div>
-  <p class="footer-copy">© 2025 Abu Talha Nasir Khan · All rights reserved</p>
+  <p class="footer-copy">© 2026 Abu Talha Nasir Khan · All rights reserved</p>
 </footer>
 
 <script>
