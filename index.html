@@ -17,572 +17,231 @@
     --muted: #7a7670;
     --white: #f5f1ea;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 4rem;
-    background: rgba(12,14,18,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    letter-spacing: .2em;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 4rem; background: rgba(12,14,18,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; letter-spacing: .18em; color: var(--gold); text-transform: uppercase; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    text-decoration: none;
-    font-size: .75rem;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    transition: color .2s;
-  }
+  .nav-links a { text-decoration: none; font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); transition: color .2s; }
   .nav-links a:hover { color: var(--gold); }
 
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-    overflow: hidden;
-    padding: 6rem 4rem 4rem;
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(201,168,76,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridFade 4s ease forwards;
-  }
-  @keyframes gridFade { from { opacity:0; } to { opacity:1; } }
-  .hero-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,168,76,.08) 0%, transparent 70%);
-    top: 50%; left: 50%; transform: translate(-50%,-50%);
-    pointer-events: none;
-  }
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 6rem 4rem 4rem; }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,.04) 1px, transparent 1px); background-size: 60px 60px; animation: gridFade 4s ease forwards; }
+  @keyframes gridFade { from{opacity:0;} to{opacity:1;} }
+  .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,.08) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
   .hero-inner { position: relative; z-index: 1; text-align: center; max-width: 800px; }
-  .hero-eyebrow {
-    font-size: .7rem; letter-spacing: .3em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.2rem;
-    opacity: 0; animation: fadeUp .8s .3s ease forwards;
-  }
-  .hero-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem,8vw,6.5rem); font-weight: 300;
-    line-height: 1; color: var(--white); letter-spacing: -.02em;
-    opacity: 0; animation: fadeUp .9s .5s ease forwards;
-  }
+  .hero-eyebrow { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; opacity: 0; animation: fadeUp .8s .3s ease forwards; }
+  .hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,8vw,6.5rem); font-weight: 300; line-height: 1; color: var(--white); letter-spacing: -.02em; opacity: 0; animation: fadeUp .9s .5s ease forwards; }
   .hero-name span { color: var(--gold); }
-  .hero-title {
-    margin-top: 1rem; font-size: 1rem; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--muted);
-    opacity: 0; animation: fadeUp .9s .7s ease forwards;
-  }
-  .hero-summary {
-    margin-top: 2rem; max-width: 560px; margin-left: auto; margin-right: auto;
-    font-size: .95rem; color: rgba(232,227,218,.65);
-    opacity: 0; animation: fadeUp .9s .9s ease forwards;
-  }
-  .hero-cta {
-    margin-top: 2.8rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp .9s 1.1s ease forwards;
-  }
-  .btn {
-    display: inline-block; padding: .7rem 2rem; border-radius: 2px;
-    font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
-    text-decoration: none; font-family: 'DM Sans', sans-serif;
-    transition: all .25s; cursor: pointer; border: none;
-  }
+  .hero-title { margin-top: 1rem; font-size: 1rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); opacity: 0; animation: fadeUp .9s .7s ease forwards; }
+  .hero-summary { margin-top: 2rem; max-width: 560px; margin-left: auto; margin-right: auto; font-size: .95rem; color: rgba(232,227,218,.65); opacity: 0; animation: fadeUp .9s .9s ease forwards; }
+  .hero-cta { margin-top: 2.8rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp .9s 1.1s ease forwards; }
+  .btn { display: inline-block; padding: .7rem 2rem; border-radius: 2px; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; font-family: 'DM Sans', sans-serif; transition: all .25s; cursor: pointer; border: none; }
   .btn-gold { background: var(--gold); color: #0c0e12; font-weight: 500; }
   .btn-gold:hover { background: #e0bc5e; transform: translateY(-1px); }
   .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--muted); }
   .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
 
-  /* ── SECTIONS ── */
+  /* SECTIONS */
   section { padding: 6rem 4rem; max-width: 1000px; margin: 0 auto; }
-  .section-label {
-    font-size: .68rem; letter-spacing: .3em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: .6rem;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif; font-size: 2.6rem;
-    font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 3rem;
-  }
+  .section-label { font-size: .68rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: .6rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 3rem; }
   .divider { width: 100%; height: 1px; background: var(--border); }
 
-  /* ── STATS ROW ── */
-  .stats-row {
-    display: grid; grid-template-columns: repeat(3,1fr);
-    gap: 1px; background: var(--border); border: 1px solid var(--border);
-    margin: 0 auto 4rem; max-width: 1000px;
-  }
+  /* STATS ROW */
+  .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 0 auto 4rem; max-width: 1000px; }
   .stat-cell { background: var(--surface); padding: 2.5rem 2rem; text-align: center; }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif; font-size: 3rem;
-    font-weight: 300; color: var(--gold); line-height: 1; display: block;
-  }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--gold); line-height: 1; display: block; }
   .stat-label { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: .4rem; }
 
-  /* ── SKILLS GRID ── */
+  /* SKILLS */
   .skills-container { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-  .skill-group-title {
-    font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.5rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border);
-  }
+  .skill-group-title { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border); }
   .skill-bar-item { margin-bottom: 1.2rem; }
   .skill-bar-top { display: flex; justify-content: space-between; font-size: .8rem; color: var(--text); margin-bottom: .4rem; }
   .skill-bar-bg { height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
-  .skill-bar-fill {
-    height: 100%; background: linear-gradient(90deg, var(--gold), #e0bc5e);
-    border-radius: 1px; width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1);
-  }
+  .skill-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #e0bc5e); border-radius: 1px; width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
   .tags-list { display: flex; flex-wrap: wrap; gap: .5rem; }
-  .tag {
-    font-size: .72rem; padding: .35rem .85rem; border: 1px solid var(--border);
-    border-radius: 2px; color: var(--muted); letter-spacing: .06em; transition: all .2s;
-  }
+  .tag { font-size: .72rem; padding: .35rem .85rem; border: 1px solid var(--border); border-radius: 2px; color: var(--muted); letter-spacing: .06em; transition: all .2s; }
   .tag:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* ── JOURNEY MAP TIMELINE (EXPERIENCE & EDUCATION) ── */
-  .journey-map { position: relative; padding-left: 20px; }
-  .journey-map::before {
-    content: ''; position: absolute; left: 0; top: 20px; bottom: 20px;
-    width: 2px; background: repeating-linear-gradient(to bottom, var(--gold) 0, var(--gold) 6px, transparent 6px, transparent 12px);
-  }
-  .tl-item {
-    padding-left: 2rem; padding-bottom: 4rem; position: relative;
-    opacity: 0; transform: translateY(20px); transition: opacity .6s, transform .6s;
-  }
-  .tl-item.visible { opacity: 1; transform: translateY(0); }
-  .tl-dot {
-    position: absolute; left: -7px; top: 1.8rem;
-    width: 16px; height: 16px; border-radius: 50%;
-    background: var(--bg); border: 2px solid var(--gold);
-    box-shadow: 0 0 10px var(--gold-dim);
-  }
-  .journey-location {
-    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: #e0bc5e; margin-bottom: 0.8rem; display: inline-flex; align-items: center;
-    background: var(--surface); padding: 0.35rem 1rem; border: 1px solid rgba(201,168,76,0.3); border-radius: 20px;
-  }
-  .tl-meta { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: .5rem; margin-bottom: .5rem; }
-  .tl-org { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--white); }
-  .tl-date { font-size: .75rem; letter-spacing: .1em; color: var(--gold); text-transform: uppercase; }
-  .tl-role { font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
-  .tl-bullets { list-style: none; }
-  .tl-bullets li { font-size: .88rem; color: rgba(232,227,218,.7); padding-left: 1.2rem; position: relative; margin-bottom: .55rem; }
-  .tl-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: .75rem; }
-  .tl-bullets strong { color: var(--text); font-weight: 500; }
+  /* ── JOURNEY MAP ── */
+  .journey-section-inner { display: flex; justify-content: center; }
 
-  /* ── PROJECTS / CARDS ── */
-  .edu-grid { display: grid; gap: 1.5rem; }
-  .edu-card {
-    border: 1px solid var(--border); padding: 1.8rem 2rem;
-    background: var(--surface); border-radius: 2px;
-    opacity: 0; transform: translateY(20px);
-    transition: opacity .6s, transform .6s, border-color .25s;
+  /* FIX 1: position:relative is REQUIRED for absolute-positioned children */
+  .journey-canvas {
+    position: relative;   /* <-- THIS WAS MISSING — caused blank sections */
+    width: 560px;
+    max-width: 100%;
   }
-  .edu-card.visible { opacity: 1; transform: translateY(0); }
-  .edu-card:hover { border-color: var(--gold); }
-  .edu-card-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: .5rem; margin-bottom: .8rem; }
-  .edu-inst { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--white); }
-  .edu-date { font-size: .7rem; color: var(--gold); letter-spacing: .1em; text-transform: uppercase; }
-  .edu-degree { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .9rem; }
-  .edu-bullets { list-style: none; }
-  .edu-bullets li { font-size: .85rem; color: rgba(232,227,218,.65); padding-left: 1rem; position: relative; margin-bottom: .4rem; }
-  .edu-bullets li::before { content: '·'; position: absolute; left: 0; color: var(--gold); }
 
-  /* ═══════════════════════════════════════
-     ── CFA HERO CARD ──
-  ═══════════════════════════════════════ */
-  .cfa-hero {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 3rem;
-    border: 1px solid var(--gold);
-    padding: 2.8rem 3rem;
+  .journey-svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .jstop {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .jstop-card {
     background: var(--surface);
-    border-radius: 2px;
-    margin-bottom: 3.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.9rem 1.1rem 0.85rem;
+    width: 200px;
+    cursor: pointer;
+    transition: border-color .22s, transform .18s;
     position: relative;
     overflow: hidden;
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity .7s, transform .7s;
   }
-  .cfa-hero.visible { opacity: 1; transform: translateY(0); }
-  /* top gold shimmer line */
-  .cfa-hero::before {
+  .jstop-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--gold) 0%, rgba(201,168,76,.3) 60%, transparent 100%);
-  }
-  /* subtle ambient glow inside card */
-  .cfa-hero::after {
-    content: '';
-    position: absolute;
-    top: -60px; left: -60px;
-    width: 260px; height: 260px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,168,76,.07) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .cfa-hero-left {
-    position: relative; z-index: 1;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .cfa-passed-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    padding: .35rem 1rem;
-    background: var(--gold-dim);
-    border: 1px solid var(--gold);
-    border-radius: 2px;
-    font-size: .65rem;
-    letter-spacing: .25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.2rem;
-    width: fit-content;
-  }
-  .cfa-passed-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--gold);
-    animation: cfaPulse 2.5s ease-in-out infinite;
-  }
-  @keyframes cfaPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: .4; transform: scale(.7); }
-  }
-  .cfa-institute-label {
-    font-size: .68rem;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: .5rem;
-  }
-  .cfa-card-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.4rem;
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1.15;
-    margin-bottom: .9rem;
-    letter-spacing: -.01em;
-  }
-  .cfa-card-title em {
-    font-style: normal;
-    color: var(--gold);
-  }
-  .cfa-description {
-    font-size: .85rem;
-    color: rgba(232,227,218,.6);
-    line-height: 1.75;
-    margin-bottom: 1.6rem;
-  }
-  .cfa-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 1.8rem;
-  }
-  .cfa-date-label {
-    font-size: .7rem;
-    letter-spacing: .12em;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-  .cfa-l2-strip {
-    display: flex;
-    align-items: center;
-    gap: .8rem;
-    padding-top: 1.4rem;
-    border-top: 1px solid var(--border);
-  }
-  .cfa-l2-indicator {
-    display: flex;
-    align-items: center;
-    gap: .45rem;
-  }
-  .cfa-l2-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--muted);
-    opacity: .6;
-    animation: sofPulse 3s ease-in-out infinite;
-  }
-  @keyframes sofPulse {
-    0%, 100% { opacity: .6; }
-    50% { opacity: .2; }
-  }
-  .cfa-l2-copy {
-    font-size: .75rem;
-    color: var(--muted);
-    letter-spacing: .07em;
-  }
-  /* right image panel */
-  .cfa-hero-right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative; z-index: 1;
-  }
-  .cfa-cert-img-wrap {
-    position: relative;
-    width: 100%;
-    cursor: zoom-in;
-  }
-  .cfa-cert-img-wrap::after {
-    content: 'Click to expand';
-    position: absolute;
-    bottom: .8rem; right: .8rem;
-    font-size: .62rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: rgba(12,14,18,.8);
-    padding: .3rem .7rem;
-    border-radius: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
     opacity: 0;
-    transition: opacity .3s;
+    transition: opacity .22s;
   }
-  .cfa-cert-img-wrap:hover::after { opacity: 1; }
-  .cfa-cert-img {
-    width: 100%;
-    border-radius: 2px;
-    border: 1px solid var(--border);
-    display: block;
-    filter: brightness(.9) saturate(.95);
-    transition: filter .4s, transform .4s, border-color .3s;
-  }
-  .cfa-cert-img-wrap:hover .cfa-cert-img {
-    filter: brightness(1) saturate(1);
-    transform: scale(1.015);
-    border-color: rgba(201,168,76,.4);
-  }
+  .jstop-card:hover { border-color: rgba(201,168,76,.5); transform: scale(1.03); }
+  .jstop-card:hover::before { opacity: 1; }
 
-  /* ═══════════════════════════════════════
-     ── OTHER CERTS GRID ──
-  ═══════════════════════════════════════ */
-  .other-certs-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.4rem;
-  }
-  .other-certs-header-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-  .other-certs-header-label {
-    font-size: .65rem;
-    letter-spacing: .25em;
-    text-transform: uppercase;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-  .cert-flip-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-
-  /* flip card */
-  .cert-flip-card {
-    height: 170px;
-    perspective: 900px;
-    cursor: pointer;
-  }
-  .cert-flip-inner {
-    position: relative;
-    width: 100%; height: 100%;
-    transition: transform .55s cubic-bezier(.4,0,.2,1);
-    transform-style: preserve-3d;
-  }
-  .cert-flip-card:hover .cert-flip-inner,
-  .cert-flip-card:focus .cert-flip-inner {
-    transform: rotateY(180deg);
-  }
-  .cert-flip-front,
-  .cert-flip-back {
-    position: absolute;
-    width: 100%; height: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    border-radius: 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 1.4rem 1.6rem;
-    transition: border-color .25s;
-  }
-  .cert-flip-front:hover { border-color: rgba(201,168,76,.3); }
-  .cert-flip-back {
-    transform: rotateY(180deg);
-    background: rgba(201,168,76,.06);
+  .jstop-card.active-card {
     border-color: var(--gold);
-    align-items: center;
-    justify-content: center;
-    gap: .7rem;
+    animation: cardPulse 2.8s ease-in-out infinite;
   }
-  .cert-flip-icon {
-    font-size: 1.5rem;
-    margin-bottom: .65rem;
-    display: block;
-    line-height: 1;
+  .jstop-card.active-card::before { opacity: 1; }
+  @keyframes cardPulse {
+    0%,100% { box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+    50%      { box-shadow: 0 0 0 7px rgba(201,168,76,0.05); }
   }
-  .cert-flip-name {
-    font-size: .82rem;
-    color: var(--text);
-    font-weight: 400;
-    margin-bottom: .3rem;
-    line-height: 1.35;
+
+  .jstop-card.tbd-card {
+    opacity: 0.45;
+    cursor: default;
+    border-style: dashed;
   }
-  .cert-flip-issuer {
-    font-size: .68rem;
-    color: var(--muted);
-    letter-spacing: .07em;
-  }
-  .cert-flip-cta {
-    font-size: .72rem;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-align: center;
-    line-height: 1.5;
-  }
-  .cert-flip-arrow {
-    font-size: 1.2rem;
-    color: var(--gold);
-    transition: transform .25s;
-  }
+  .jstop-card.tbd-card:hover { transform: none; border-color: var(--border); }
+  .jstop-card.tbd-card::before { display: none; }
+
+  .jstop-icon { font-size: 1.2rem; line-height: 1; margin-bottom: .35rem; }
+  .jstop-city { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: .18rem; display: flex; align-items: center; gap: 4px; }
+  .jstop-city-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .jstop-org { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; color: var(--white); line-height: 1.25; }
+  .jstop-role { font-size: .65rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-top: .12rem; }
+  .jstop-date { font-size: .62rem; color: rgba(201,168,76,.7); margin-top: .08rem; }
+  .jstop-tbd-label { font-size: .72rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+
+  /* POPUP MODAL */
+  .modal-backdrop { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,.7); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 2rem; }
+  .modal-backdrop.open { display: flex; }
+  .modal-box { position: relative; width: 100%; max-width: 520px; max-height: 82vh; background: var(--surface); border: 1px solid rgba(201,168,76,.3); border-radius: 4px; overflow: hidden; animation: modalIn .25s ease; }
+  @keyframes modalIn { from{opacity:0;transform:translateY(10px) scale(.97);} to{opacity:1;transform:none;} }
+  .modal-topbar { display: flex; justify-content: space-between; align-items: center; padding: .85rem 1.2rem; border-bottom: 1px solid var(--border); }
+  .modal-title { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); }
+  .modal-close { background: transparent; border: 1px solid var(--border); color: var(--muted); width: 28px; height: 28px; border-radius: 2px; cursor: pointer; font-size: .85rem; display: flex; align-items: center; justify-content: center; transition: all .2s; font-family: 'DM Sans', sans-serif; }
+  .modal-close:hover { border-color: var(--gold); color: var(--gold); }
+  .modal-body { padding: 1.3rem 1.4rem 1.5rem; overflow-y: auto; max-height: calc(82vh - 52px); }
+  .modal-city { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; display: flex; align-items: center; gap: 5px; }
+  .modal-city-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .modal-org { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--white); line-height: 1.2; margin-bottom: .2rem; }
+  .modal-role { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .15rem; }
+  .modal-date { font-size: .7rem; color: rgba(201,168,76,.8); margin-bottom: .9rem; }
+  .modal-divider { height: 1px; background: var(--border); margin-bottom: .85rem; }
+  .modal-bullets { list-style: none; }
+  .modal-bullets li { font-size: .84rem; color: rgba(232,227,218,.7); padding-left: 1.15rem; position: relative; margin-bottom: .5rem; line-height: 1.65; }
+  .modal-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: .72rem; top: 3px; }
+  .modal-bullets strong { color: var(--text); font-weight: 500; }
+
+  /* CFA HERO */
+  .cfa-hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; border: 1px solid var(--gold); padding: 2.8rem 3rem; background: var(--surface); border-radius: 2px; margin-bottom: 3.5rem; position: relative; overflow: hidden; opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+  .cfa-hero.visible { opacity: 1; transform: translateY(0); }
+  .cfa-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold) 0%, rgba(201,168,76,.3) 60%, transparent 100%); }
+  .cfa-hero::after { content: ''; position: absolute; top: -60px; left: -60px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,.07) 0%, transparent 70%); pointer-events: none; }
+  .cfa-hero-left { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; }
+  .cfa-passed-badge { display: inline-flex; align-items: center; gap: .5rem; padding: .35rem 1rem; background: var(--gold-dim); border: 1px solid var(--gold); border-radius: 2px; font-size: .65rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; width: fit-content; }
+  .cfa-passed-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: cfaPulse 2.5s ease-in-out infinite; }
+  @keyframes cfaPulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(.7);} }
+  .cfa-institute-label { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: .5rem; }
+  .cfa-card-title { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: .9rem; letter-spacing: -.01em; }
+  .cfa-card-title em { font-style: normal; color: var(--gold); }
+  .cfa-description { font-size: .85rem; color: rgba(232,227,218,.6); line-height: 1.75; margin-bottom: 1.6rem; }
+  .cfa-actions { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.8rem; }
+  .cfa-date-label { font-size: .7rem; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; }
+  .cfa-l2-strip { display: flex; align-items: center; gap: .8rem; padding-top: 1.4rem; border-top: 1px solid var(--border); }
+  .cfa-l2-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); opacity: .6; animation: sofPulse 3s ease-in-out infinite; }
+  @keyframes sofPulse { 0%,100%{opacity:.6;} 50%{opacity:.2;} }
+  .cfa-l2-copy { font-size: .75rem; color: var(--muted); letter-spacing: .07em; }
+  .cfa-hero-right { display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+  .cfa-cert-img-wrap { position: relative; width: 100%; cursor: zoom-in; }
+  .cfa-cert-img-wrap::after { content: 'Click to expand'; position: absolute; bottom: .8rem; right: .8rem; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); background: rgba(12,14,18,.8); padding: .3rem .7rem; border-radius: 2px; opacity: 0; transition: opacity .3s; }
+  .cfa-cert-img-wrap:hover::after { opacity: 1; }
+  .cfa-cert-img { width: 100%; border-radius: 2px; border: 1px solid var(--border); display: block; filter: brightness(.9) saturate(.95); transition: filter .4s, transform .4s, border-color .3s; }
+  .cfa-cert-img-wrap:hover .cfa-cert-img { filter: brightness(1) saturate(1); transform: scale(1.015); border-color: rgba(201,168,76,.4); }
+
+  /* OTHER CERTS */
+  .other-certs-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.4rem; }
+  .other-certs-header-line { flex: 1; height: 1px; background: var(--border); }
+  .other-certs-header-label { font-size: .65rem; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .cert-flip-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .cert-flip-card { height: 170px; perspective: 900px; cursor: pointer; }
+  .cert-flip-inner { position: relative; width: 100%; height: 100%; transition: transform .55s cubic-bezier(.4,0,.2,1); transform-style: preserve-3d; }
+  .cert-flip-card:hover .cert-flip-inner,
+  .cert-flip-card:focus .cert-flip-inner { transform: rotateY(180deg); }
+  .cert-flip-front,
+  .cert-flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border: 1px solid var(--border); background: var(--surface); border-radius: 2px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 1.4rem 1.6rem; transition: border-color .25s; }
+  .cert-flip-front:hover { border-color: rgba(201,168,76,.3); }
+  .cert-flip-back { transform: rotateY(180deg); background: rgba(201,168,76,.06); border-color: var(--gold); align-items: center; justify-content: center; gap: .7rem; }
+  .cert-flip-icon { font-size: 1.5rem; margin-bottom: .65rem; display: block; line-height: 1; }
+  .cert-flip-name { font-size: .82rem; color: var(--text); font-weight: 400; margin-bottom: .3rem; line-height: 1.35; }
+  .cert-flip-issuer { font-size: .68rem; color: var(--muted); letter-spacing: .07em; }
+  .cert-flip-cta { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); text-align: center; line-height: 1.5; }
+  .cert-flip-arrow { font-size: 1.2rem; color: var(--gold); transition: transform .25s; }
   .cert-flip-card:hover .cert-flip-arrow { transform: translateX(4px); }
 
-  /* ═══════════════════════════════════════
-     ── CERTIFICATE MODAL ──
-  ═══════════════════════════════════════ */
-  .cert-modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.88);
-    z-index: 500;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    backdrop-filter: blur(4px);
-  }
+  /* CERT MODAL */
+  .cert-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 600; align-items: center; justify-content: center; padding: 2rem; backdrop-filter: blur(4px); }
   .cert-modal-overlay.open { display: flex; }
-  .cert-modal-box {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    max-height: 90vh;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    overflow: hidden;
-    animation: modalIn .3s ease;
-  }
-  @keyframes modalIn {
-    from { opacity: 0; transform: translateY(12px) scale(.98); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  .cert-modal-topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .9rem 1.4rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .cert-modal-title {
-    font-size: .75rem;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .cert-modal-close-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    width: 2rem; height: 2rem;
-    border-radius: 2px;
-    cursor: pointer;
-    font-size: .9rem;
-    display: flex; align-items: center; justify-content: center;
-    transition: all .2s;
-    line-height: 1;
-    font-family: 'DM Sans', sans-serif;
-  }
+  .cert-modal-box { position: relative; width: 100%; max-width: 900px; max-height: 90vh; background: var(--surface); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; animation: modalIn .3s ease; }
+  .cert-modal-topbar { display: flex; justify-content: space-between; align-items: center; padding: .9rem 1.4rem; border-bottom: 1px solid var(--border); }
+  .cert-modal-title { font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); }
+  .cert-modal-close-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); width: 2rem; height: 2rem; border-radius: 2px; cursor: pointer; font-size: .9rem; display: flex; align-items: center; justify-content: center; transition: all .2s; line-height: 1; font-family: 'DM Sans', sans-serif; }
   .cert-modal-close-btn:hover { border-color: var(--gold); color: var(--gold); }
   .cert-modal-body { overflow-y: auto; }
-  .cert-modal-frame {
-    width: 100%;
-    height: 80vh;
-    border: none;
-    display: block;
-  }
-  .cert-modal-img {
-    width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    display: block;
-  }
+  .cert-modal-frame { width: 100%; height: 80vh; border: none; display: block; }
+  .cert-modal-img { width: 100%; max-height: 80vh; object-fit: contain; display: block; }
 
-  /* ── CONTACT FOOTER ── */
+  /* FOOTER */
   footer { border-top: 1px solid var(--border); padding: 4rem; text-align: center; }
   .contact-grid { display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
-  .contact-item {
-    text-decoration: none; font-size: .75rem; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--muted); transition: color .2s;
-    display: flex; flex-direction: column; align-items: center; gap: .4rem;
-  }
+  .contact-item { text-decoration: none; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); transition: color .2s; display: flex; flex-direction: column; align-items: center; gap: .4rem; }
   .contact-item .ci-label { color: var(--gold); font-size: .65rem; }
   .contact-item:hover { color: var(--white); }
   .footer-copy { font-size: .68rem; color: var(--muted); letter-spacing: .1em; }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  /* ANIMATIONS */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:translateY(0);} }
 
-  /* ── RESPONSIVE ── */
+  /* RESPONSIVE */
   @media (max-width: 900px) {
     .cfa-hero { grid-template-columns: 1fr; gap: 2rem; }
     .cfa-hero-right { order: -1; }
     .cfa-cert-img { max-height: 220px; object-fit: contain; }
     .cert-flip-grid { grid-template-columns: 1fr 1fr; }
+    .journey-canvas { width: 100%; max-width: 560px; }
   }
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
@@ -591,18 +250,17 @@
     #hero { padding: 5rem 1.5rem 3rem; }
     .stats-row { grid-template-columns: 1fr; }
     .skills-container { grid-template-columns: 1fr; gap: 2rem; }
-    .tl-meta { flex-direction: column; }
     .contact-grid { flex-direction: column; align-items: center; gap: 1.5rem; }
     footer { padding: 3rem 1.5rem; }
     .cfa-hero { padding: 1.8rem; }
     .cfa-card-title { font-size: 1.9rem; }
     .cert-flip-grid { grid-template-columns: 1fr 1fr; }
+    .jstop-card { width: 160px; }
   }
   @media (max-width: 480px) {
     .cert-flip-grid { grid-template-columns: 1fr; }
+    .jstop-card { width: 140px; }
   }
-
-  /* scrollbar */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -616,7 +274,6 @@
   <ul class="nav-links">
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#certifications">Certifications</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -624,19 +281,17 @@
 </nav>
 
 <!-- HERO -->
-<section id="hero" style="max-width:100%; padding-top:0; padding-bottom:0;">
+<section id="hero" style="max-width:100%;padding-top:0;padding-bottom:0;">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-inner">
-    <p class="hero-eyebrow">Business Analyst · ISB · CFA Level I Passed[cite: 1]</p>
-    <h1 class="hero-name">Abu <span>Talha</span><br>Nasir Khan[cite: 1]</h1>
-    <p class="hero-title">Data-Driven Strategy · Business Intelligence · Financial Analysis</p>
-    <p class="hero-summary">
-      Business Analyst at the Indian School of Business with a strong foundation in data analytics, financial modelling, and machine learning — translating complex data into clear strategic decisions.
-    </p>
+    <p class="hero-eyebrow">Business Strategy Analyst &middot; ISB &middot; CFA Level I Passed</p>
+    <h1 class="hero-name">Abu <span>Talha</span><br>Nasir Khan</h1>
+    <p class="hero-title">Data-Driven Strategy &middot; Business Intelligence &middot; Financial Analysis</p>
+    <p class="hero-summary">MBA graduate and CFA Level II Candidate specialising in data-driven research and labour market analytics &mdash; translating complex data into clear, executive-level strategic decisions.</p>
     <div class="hero-cta">
       <a href="#experience" class="btn btn-gold">View Work</a>
-      <a href="mailto:abutalha.khan53@gmail.com" class="btn btn-outline">Get In Touch[cite: 1]</a>
+      <a href="mailto:abutalha.khan53@gmail.com" class="btn btn-outline">Get In Touch</a>
     </div>
   </div>
 </section>
@@ -645,55 +300,26 @@
 <div class="stats-row">
   <div class="stat-cell">
     <span class="stat-num" data-target="95">0</span><span class="stat-num">%</span>
-    <span class="stat-label">Reporting Time Saved[cite: 1]</span>
+    <span class="stat-label">Reporting Time Saved</span>
   </div>
   <div class="stat-cell">
-    <span class="stat-num">₹400<span style="font-size:1.4rem">Cr</span></span>
-    <span class="stat-label">Compensation Tracked[cite: 1]</span>
+    <span class="stat-num">&#8377;400<span style="font-size:1.4rem">Cr</span></span>
+    <span class="stat-label">Compensation Tracked</span>
   </div>
   <div class="stat-cell">
     <span class="stat-num" data-target="30">0</span><span class="stat-num">%</span>
-    <span class="stat-label">ML Error Reduction[cite: 1]</span>
+    <span class="stat-label">ML Error Reduction</span>
   </div>
 </div>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <p class="section-label">Career Path</p>
-  <h2 class="section-title">Professional<br>Journey</h2>
-  <div class="journey-map">
-
-    <!-- Role 1 -->
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="journey-location">📍 Delhi NCR / Gurgaon, India</div>
-      <div class="tl-meta">
-        <span class="tl-org">Outlook Publishing Pvt Ltd.[cite: 1]</span>
-        <span class="tl-date">2024[cite: 1]</span>
-      </div>
-      <p class="tl-role">Business Analyst Intern[cite: 1]</p>
-      <ul class="tl-bullets">
-        <li>Evaluated macroeconomic drivers and competitive dynamics within the media and publishing sector to analyze, model, and forecast long-term market size ($30 Billion) and its contraction trends.[cite: 1]</li>
-      </ul>
+  <p class="section-label">Career Journey</p>
+  <h2 class="section-title">Professional<br>Experience</h2>
+  <div class="journey-section-inner">
+    <div class="journey-canvas" id="expCanvas" style="height:680px;">
+      <svg class="journey-svg" id="expSvg" viewBox="0 0 560 680" preserveAspectRatio="xMidYMid meet"></svg>
     </div>
-
-    <!-- Role 2 -->
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="journey-location">📍 Hyderabad, India</div>
-      <div class="tl-meta">
-        <span class="tl-org">Indian School of Business[cite: 1]</span>
-        <span class="tl-date">2025 — Present[cite: 1]</span>
-      </div>
-      <p class="tl-role">Business Strategy Analyst (Management Trainee)[cite: 1]</p>
-      <ul class="tl-bullets">
-        <li>Architected automated Power BI dashboards via Salesforce and Foreign Exchange API integrations to track ₹400Cr in compensation, ensuring 100% data integrity and slashing reporting time by 95% (from 60 to 3 hours).[cite: 1]</li>
-        <li>Engineered quantitative ML prediction models and automated data pipelines; performed rigorous root cause analysis on data discrepancies to map model risks, reducing targeting errors by 30%.[cite: 1]</li>
-        <li>Conducted comprehensive reviews of unstructured process documents, deploying NLP sentiment analysis (NLTK, scikit-learn) to extract qualitative insights and augment data pipelines.[cite: 1]</li>
-        <li>Conducted financial feasibility analysis for a ₹50Cr+ project; built robust DCF and NPV models, integrating Monte Carlo simulations and variance analysis for operational risk management.[cite: 1]</li>
-      </ul>
-    </div>
-
   </div>
 </section>
 
@@ -705,9 +331,9 @@
   <h2 class="section-title">Skills &amp;<br>Expertise</h2>
   <div class="skills-container">
     <div>
-      <p class="skill-group-title">Core Competencies[cite: 1]</p>
+      <p class="skill-group-title">Core Competencies</p>
       <div class="skill-bar-item">
-        <div class="skill-bar-top"><span>Data Analysis &amp; Automation</span><span>92%</span></div>
+        <div class="skill-bar-top"><span>Data Analysis &amp; Reporting</span><span>92%</span></div>
         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92"></div></div>
       </div>
       <div class="skill-bar-item">
@@ -715,69 +341,45 @@
         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div>
       </div>
       <div class="skill-bar-item">
-        <div class="skill-bar-top"><span>Financial Modeling (DCF, NPV)</span><span>88%</span></div>
+        <div class="skill-bar-top"><span>Financial Modelling &amp; Analysis</span><span>88%</span></div>
         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div>
       </div>
       <div class="skill-bar-item">
-        <div class="skill-bar-top"><span>Python (Advanced Pandas) &amp; SQL</span><span>87%</span></div>
+        <div class="skill-bar-top"><span>Python &amp; SQL</span><span>87%</span></div>
         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="87"></div></div>
       </div>
       <div class="skill-bar-item">
-        <div class="skill-bar-top"><span>Statistical Modeling &amp; ML</span><span>78%</span></div>
+        <div class="skill-bar-top"><span>Machine Learning Applications</span><span>78%</span></div>
         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div>
       </div>
     </div>
     <div>
-      <p class="skill-group-title">Tools &amp; Platforms[cite: 1]</p>
+      <p class="skill-group-title">Tools &amp; Platforms</p>
       <div class="tags-list" style="margin-bottom:2rem;">
-        <span class="tag">Excel (VBA, Power Query)</span>
-        <span class="tag">Bloomberg</span>
+        <span class="tag">Excel (VBA &middot; Power Query)</span>
+        <span class="tag">PowerPoint</span>
         <span class="tag">Python</span>
         <span class="tag">Power BI</span>
+        <span class="tag">SQL</span>
         <span class="tag">Salesforce</span>
+        <span class="tag">Bloomberg</span>
         <span class="tag">GitHub</span>
         <span class="tag">Git</span>
         <span class="tag">Jira</span>
       </div>
-      <p class="skill-group-title">Domain Knowledge[cite: 1]</p>
+      <p class="skill-group-title">Domain Knowledge</p>
       <div class="tags-list">
-        <span class="tag">Reference Data Management</span>
-        <span class="tag">Security Master Setup</span>
-        <span class="tag">Root Cause Analysis</span>
+        <span class="tag">A/B Testing</span>
+        <span class="tag">NLP Sentiment Analysis</span>
+        <span class="tag">Data Pipelines</span>
+        <span class="tag">Feature Engineering</span>
         <span class="tag">DCF / NPV</span>
-        <span class="tag">Variance &amp; Sensitivity Analysis</span>
+        <span class="tag">Monte Carlo Simulation</span>
+        <span class="tag">Stakeholder Management</span>
         <span class="tag">Strategic Analysis</span>
-        <span class="tag">Financial Modeling</span>
-        <span class="tag">Portfolio Management</span>
+        <span class="tag">Financial Modelling</span>
+        <span class="tag">Reference Data Management</span>
       </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider" style="max-width:1000px;margin:0 auto;"></div>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <p class="section-label">Portfolio</p>
-  <h2 class="section-title">Projects</h2>
-  <div class="edu-grid">
-    <div class="edu-card">
-      <div class="edu-card-top">
-        <span class="edu-inst">Competitor Analysis Report (Leather Industry)[cite: 1]</span>
-        <span class="edu-date">2024[cite: 1]</span>
-      </div>
-      <ul class="edu-bullets">
-        <li>Analyzed a 3% decline in EBITDA and PAT driven by a 5% COGS increase, while assessing market risk (beta 1.2) and benchmarking against competitor Sreeleathers' growth.[cite: 1]</li>
-      </ul>
-    </div>
-    <div class="edu-card">
-      <div class="edu-card-top">
-        <span class="edu-inst">Comprehensive Financial Modeling and Reporting (Tata Motors)[cite: 1]</span>
-        <span class="edu-date">2023[cite: 1]</span>
-      </div>
-      <ul class="edu-bullets">
-        <li>Built a Tata Motors financial model (DCF, comps) with 95% forecasting accuracy, projecting 8% 5-year revenue growth.[cite: 1]</li>
-      </ul>
     </div>
   </div>
 </section>
@@ -786,282 +388,491 @@
 
 <!-- EDUCATION -->
 <section id="education">
-  <p class="section-label">Academic Background</p>
-  <h2 class="section-title">Education<br>Journey</h2>
-  <div class="journey-map">
-
-    <!-- Edu 1 -->
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="journey-location">📍 Aligarh, Uttar Pradesh, India</div>
-      <div class="tl-meta">
-        <span class="tl-org">Aligarh Muslim University[cite: 1]</span>
-        <span class="tl-date">2020 — 2023[cite: 1]</span>
-      </div>
-      <p class="tl-role">Bachelor of Science in Mathematics with Statistics[cite: 1]</p>
-      <ul class="tl-bullets">
-        <li>Built a strong foundation in statistical analysis during undergraduate studies.[cite: 1]</li>
-      </ul>
+  <p class="section-label">Academic Journey</p>
+  <h2 class="section-title">Education</h2>
+  <div class="journey-section-inner">
+    <div class="journey-canvas" id="eduCanvas" style="height:760px;">
+      <svg class="journey-svg" id="eduSvg" viewBox="0 0 560 760" preserveAspectRatio="xMidYMid meet"></svg>
     </div>
-
-    <!-- Edu 2 -->
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="journey-location">📍 New Delhi, India</div>
-      <div class="tl-meta">
-        <span class="tl-org">Jamia Millia Islamia[cite: 1]</span>
-        <span class="tl-date">2023 — 2025[cite: 1]</span>
-      </div>
-      <p class="tl-role">MBA: Finance[cite: 1]</p>
-      <ul class="tl-bullets">
-        <li>Analyzed an ESG-augmented Fama-French 5-factor model through data cleaning and statistical analysis, identifying Governance factors as significant predictors.[cite: 1]</li>
-        <li>Secured 1st place in a national business case competition by designing an AI/ML-enabled platform backed by a comprehensive 5-year financial forecast and market strategy.[cite: 1]</li>
-      </ul>
-    </div>
-
   </div>
 </section>
 
 <div class="divider" style="max-width:1000px;margin:0 auto;"></div>
 
-<!-- ══════════════════════════════════════════
-     CERTIFICATIONS
-══════════════════════════════════════════ -->
+<!-- CERTIFICATIONS -->
 <section id="certifications">
   <p class="section-label">Credentials</p>
   <h2 class="section-title">Certifications</h2>
 
-  <!-- ── CFA HERO ── -->
   <div class="cfa-hero" id="cfaHero">
     <div class="cfa-hero-left">
-      <div class="cfa-passed-badge">Passed · February 2026[cite: 1]</div>
-      <p class="cfa-institute-label">CFA Institute[cite: 1]</p>
-      <h3 class="cfa-card-title">Chartered Financial<br>Analyst — <em>Level I Passed[cite: 1]</em></h3>
-      <p class="cfa-description">
-        Studied bond valuation, duration &amp; convexity, equity analysis, discounted cash flow
-        models, derivatives pricing, real estate &amp; alternative investments, code of ethics
-        &amp; professional standards, and quantitative methods including time value of money
-        and hypothesis testing — across the Level I curriculum.
-      </p>
+      <div class="cfa-passed-badge">Passed &middot; February 2026</div>
+      <p class="cfa-institute-label">CFA Institute</p>
+      <h3 class="cfa-card-title">Chartered Financial<br>Analyst &mdash; <em>Level I Passed</em></h3>
+      <p class="cfa-description">Studied bond valuation, duration &amp; convexity, equity analysis, discounted cash flow models, derivatives pricing, real estate &amp; alternative investments, code of ethics &amp; professional standards, and quantitative methods including time value of money and hypothesis testing &mdash; across the Level I curriculum.</p>
       <div class="cfa-actions">
-        <button class="btn btn-gold"
-          onclick="openCertModal('assets/certs/CFA_L1_Passed.png', 'image', 'CFA Level I — Passed')">
-          View Certificate
-        </button>
+        <button class="btn btn-gold" onclick="openCertModal('assets/certs/CFA_L1_Passed.png','image','CFA Level I \u2014 Passed')">View Certificate</button>
         <span class="cfa-date-label">Feb 2026</span>
       </div>
       <div class="cfa-l2-strip">
-        <div class="cfa-l2-indicator">
-          <span class="cfa-l2-dot"></span>
-        </div>
-        <span class="cfa-l2-copy">CFA Level II Candidate &mdash; Sitting November 2026[cite: 1]</span>
+        <span class="cfa-l2-dot"></span>
+        <span class="cfa-l2-copy">CFA Level II Candidate &mdash; Sitting November 2026</span>
       </div>
     </div>
-
     <div class="cfa-hero-right">
-      <div class="cfa-cert-img-wrap"
-           onclick="openCertModal('assets/certs/CFA_L1_Passed.png', 'image', 'CFA Level I — Passed')">
-        <img
-          src="assets/certs/CFA_L1_Passed.png"
-          alt="CFA Level I Passed Certificate"
-          class="cfa-cert-img"
-        />
+      <div class="cfa-cert-img-wrap" onclick="openCertModal('assets/certs/CFA_L1_Passed.png','image','CFA Level I \u2014 Passed')">
+        <img src="assets/certs/CFA_L1_Passed.png" alt="CFA Level I Passed Certificate" class="cfa-cert-img"/>
       </div>
     </div>
   </div>
 
-  <!-- ── OTHER CERTS ── -->
   <div class="other-certs-header">
-    <span class="other-certs-header-label">Additional Credentials[cite: 1]</span>
+    <span class="other-certs-header-label">Additional Credentials</span>
     <div class="other-certs-header-line"></div>
     <span class="other-certs-header-label">Hover to view</span>
   </div>
 
   <div class="cert-flip-grid">
-
-    <div class="cert-flip-card" tabindex="0" role="button" aria-label="View Bloomberg Certificate"
-         onclick="openCertModal('assets/certs/Talha_BMC.pdf', 'pdf', 'BMC — Bloomberg')">
+    <div class="cert-flip-card" tabindex="0" onclick="openCertModal('assets/certs/Talha_BMC.pdf','pdf','BMC \u2014 Bloomberg')">
       <div class="cert-flip-inner">
         <div class="cert-flip-front">
-          <span class="cert-flip-icon">📊</span>
-          <p class="cert-flip-name">Bloomberg Market Concepts[cite: 1]</p>
-          <p class="cert-flip-issuer">Bloomberg[cite: 1]</p>
+          <span class="cert-flip-icon">&#x1F4CA;</span>
+          <p class="cert-flip-name">Bloomberg Market Concepts</p>
+          <p class="cert-flip-issuer">Bloomberg</p>
         </div>
-        <div class="cert-flip-back">
-          <span class="cert-flip-cta">View<br>Certificate</span>
-          <span class="cert-flip-arrow">→</span>
-        </div>
+        <div class="cert-flip-back"><span class="cert-flip-cta">View<br>Certificate</span><span class="cert-flip-arrow">&#x2192;</span></div>
       </div>
     </div>
-
-    <div class="cert-flip-card" tabindex="0" role="button" aria-label="View Stanford ML certificate"
-         onclick="openCertModal('assets/certs/ML_Stanford.pdf', 'pdf', 'Supervised ML — Stanford Online')">
+    <div class="cert-flip-card" tabindex="0" onclick="openCertModal('assets/certs/ML_Stanford.pdf','pdf','Supervised ML \u2014 Stanford Online')">
       <div class="cert-flip-inner">
         <div class="cert-flip-front">
-          <span class="cert-flip-icon">🤖</span>
-          <p class="cert-flip-name">Supervised Machine Learning[cite: 1]</p>
-          <p class="cert-flip-issuer">Stanford Online[cite: 1]</p>
+          <span class="cert-flip-icon">&#x1F916;</span>
+          <p class="cert-flip-name">Supervised Machine Learning</p>
+          <p class="cert-flip-issuer">Stanford Online &middot; Regression &amp; Classification</p>
         </div>
-        <div class="cert-flip-back">
-          <span class="cert-flip-cta">View<br>Certificate</span>
-          <span class="cert-flip-arrow">→</span>
-        </div>
+        <div class="cert-flip-back"><span class="cert-flip-cta">View<br>Certificate</span><span class="cert-flip-arrow">&#x2192;</span></div>
       </div>
     </div>
-
-    <div class="cert-flip-card" tabindex="0" role="button" aria-label="View Power BI certificate"
-         onclick="openCertModal('assets/certs/PowerBI.pdf', 'pdf', 'Power BI — Datacamp')">
+    <div class="cert-flip-card" tabindex="0" onclick="openCertModal('assets/certs/PowerBI.pdf','pdf','Power BI \u2014 Datacamp')">
       <div class="cert-flip-inner">
         <div class="cert-flip-front">
-          <span class="cert-flip-icon">📈</span>
-          <p class="cert-flip-name">Power BI[cite: 1]</p>
-          <p class="cert-flip-issuer">Datacamp[cite: 1]</p>
+          <span class="cert-flip-icon">&#x1F4C8;</span>
+          <p class="cert-flip-name">Power BI</p>
+          <p class="cert-flip-issuer">Datacamp</p>
         </div>
-        <div class="cert-flip-back">
-          <span class="cert-flip-cta">View<br>Certificate</span>
-          <span class="cert-flip-arrow">→</span>
-        </div>
+        <div class="cert-flip-back"><span class="cert-flip-cta">View<br>Certificate</span><span class="cert-flip-arrow">&#x2192;</span></div>
       </div>
     </div>
-
-    <div class="cert-flip-card" tabindex="0" role="button" aria-label="View Python certificate"
-         onclick="openCertModal('assets/certs/Python_Cert.pdf', 'pdf', 'Advanced Pandas — LinkedIn Learning')">
+    <div class="cert-flip-card" tabindex="0" onclick="openCertModal('assets/certs/Python_Cert.pdf','pdf','Advanced Pandas \u2014 LinkedIn Learning')">
       <div class="cert-flip-inner">
         <div class="cert-flip-front">
-          <span class="cert-flip-icon">🐼</span>
-          <p class="cert-flip-name">Advanced Pandas[cite: 1]</p>
-          <p class="cert-flip-issuer">LinkedIn Learning[cite: 1]</p>
+          <span class="cert-flip-icon">&#x1F43C;</span>
+          <p class="cert-flip-name">Advanced Pandas</p>
+          <p class="cert-flip-issuer">LinkedIn Learning</p>
         </div>
-        <div class="cert-flip-back">
-          <span class="cert-flip-cta">View<br>Certificate</span>
-          <span class="cert-flip-arrow">→</span>
-        </div>
+        <div class="cert-flip-back"><span class="cert-flip-cta">View<br>Certificate</span><span class="cert-flip-arrow">&#x2192;</span></div>
       </div>
     </div>
-
+    <div class="cert-flip-card" tabindex="0" onclick="openCertModal('assets/certs/Git_and_GitHub.pdf','pdf','Git &amp; GitHub \u2014 LinkedIn Learning')">
+      <div class="cert-flip-inner">
+        <div class="cert-flip-front">
+          <span class="cert-flip-icon">&#x1F419;</span>
+          <p class="cert-flip-name">Git &amp; GitHub</p>
+          <p class="cert-flip-issuer">LinkedIn Learning</p>
+        </div>
+        <div class="cert-flip-back"><span class="cert-flip-cta">View<br>Certificate</span><span class="cert-flip-arrow">&#x2192;</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════
-     CERTIFICATE MODAL
-══════════════════════════════════════════ -->
-<div class="cert-modal-overlay" id="certModal" onclick="handleModalClick(event)">
-  <div class="cert-modal-box" role="dialog" aria-modal="true">
+<!-- CERT MODAL -->
+<div class="cert-modal-overlay" id="certModal" onclick="handleCertModalClick(event)">
+  <div class="cert-modal-box">
     <div class="cert-modal-topbar">
       <span class="cert-modal-title" id="certModalTitle">Certificate</span>
-      <button class="cert-modal-close-btn" onclick="closeCertModal()" aria-label="Close">✕</button>
+      <button class="cert-modal-close-btn" onclick="closeCertModal()">&#x2715;</button>
     </div>
     <div class="cert-modal-body">
       <iframe id="certModalFrame" class="cert-modal-frame" src="" title="Certificate viewer" style="display:none;"></iframe>
-      <img id="certModalImg" class="cert-modal-img" src="" alt="Certificate" style="display:none;" />
+      <img id="certModalImg" class="cert-modal-img" src="" alt="Certificate" style="display:none;"/>
     </div>
   </div>
 </div>
 
-<!-- CONTACT / FOOTER -->
+<!-- JOURNEY POPUP MODAL -->
+<div class="modal-backdrop" id="journeyModal" onclick="handleJourneyBackdropClick(event)">
+  <div class="modal-box">
+    <div class="modal-topbar">
+      <span class="modal-title" id="journeyModalTitle">Details</span>
+      <button class="modal-close" onclick="closeJourneyModal()">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="journeyModalBody"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer id="contact">
   <p class="section-label" style="margin-bottom:1.5rem;">Get In Touch</p>
   <div class="contact-grid">
     <a class="contact-item" href="mailto:abutalha.khan53@gmail.com">
-      <span class="ci-label">Email[cite: 1]</span>
-      <span>abutalha.khan53@gmail.com[cite: 1]</span>
+      <span class="ci-label">Email</span>
+      <span>abutalha.khan53@gmail.com</span>
     </a>
     <a class="contact-item" href="tel:+916395332478">
-      <span class="ci-label">Phone[cite: 1]</span>
-      <span>+91 6395332478[cite: 1]</span>
+      <span class="ci-label">Phone</span>
+      <span>+91 6395332478</span>
     </a>
     <a class="contact-item" href="#">
-      <span class="ci-label">Location[cite: 1]</span>
-      <span>Hyderabad, India[cite: 1]</span>
+      <span class="ci-label">Location</span>
+      <span>Hyderabad, India</span>
     </a>
   </div>
-  <p class="footer-copy">© 2026 Abu Talha Nasir Khan · All rights reserved</p>
+  <p class="footer-copy">&copy; 2025 Abu Talha Nasir Khan &middot; All rights reserved</p>
 </footer>
 
 <script>
-  /* ── Skill bars & counters ── */
-  const bars = document.querySelectorAll('.skill-bar-fill');
-  const statsNums = document.querySelectorAll('.stat-num[data-target]');
-  const animElems = document.querySelectorAll('.tl-item, .edu-card');
-  const cfaHero = document.getElementById('cfaHero');
+/* ==============================================
+   DATA — plain JS strings, no HTML encoding
+   ============================================== */
+var EXP_STOPS = [
+  {
+    type: 'tbd',
+    icon: '\u{1F52E}',
+    org: 'Future Role', role: 'TBD', date: '', city: '', bullets: []
+  },
+  {
+    type: 'active',
+    icon: '\u{1F3DB}',
+    city: 'Hyderabad, India',
+    org: 'Indian School of Business',
+    role: 'Business Strategy Analyst \u00B7 Management Trainee',
+    date: '2025 \u2014 Present',
+    bullets: [
+      'Architected automated <strong>Power BI dashboards</strong> via Salesforce &amp; FX API integrations to track <strong>&#8377;400Cr in compensation</strong>, slashing reporting time by <strong>95% (60 \u2192 3 hrs)</strong>.',
+      'Engineered <strong>ML salary prediction models</strong> &amp; automated data pipelines; root-cause analysis on discrepancies reduced targeting errors by <strong>30%</strong>.',
+      'Deployed <strong>NLP sentiment analysis</strong> (NLTK, scikit-learn) on unstructured process documents to extract qualitative insights and augment data pipelines.',
+      'Built DCF &amp; NPV models with Monte Carlo simulations for a <strong>&#8377;50Cr+ financial feasibility analysis</strong>.',
+      'Partnered with senior stakeholders to deliver strategic insights via A/B testing &amp; statistical modelling within a <strong>40-hour turnaround</strong>.'
+    ]
+  },
+  {
+    type: 'done',
+    icon: '\u{1F4F0}',
+    city: 'New Delhi, India',
+    org: 'Outlook Publishing Pvt. Ltd.',
+    role: 'Business Analyst Intern',
+    date: '2024',
+    bullets: [
+      'Evaluated macroeconomic drivers &amp; competitive dynamics within the media &amp; publishing sector.',
+      'Modelled and forecasted long-term market size (<strong>US$30 Billion</strong>) and contraction trends.',
+      'Synthesised industry research into executive-level reports shaping strategic positioning.'
+    ]
+  }
+];
 
-  const animateCounter = (el) => {
-    const target = +el.dataset.target;
-    let count = 0;
-    const step = target / 50;
-    const timer = setInterval(() => {
-      count = Math.min(count + step, target);
-      el.textContent = Math.round(count);
-      if (count >= target) clearInterval(timer);
-    }, 28);
-  };
+var EDU_STOPS = [
+  {
+    type: 'tbd',
+    icon: '\u{1F52E}',
+    org: 'Future Studies', role: 'TBD', date: '', city: '', bullets: []
+  },
+  {
+    type: 'active',
+    icon: '\u{1F393}',
+    city: 'New Delhi, India',
+    org: 'Jamia Millia Islamia',
+    role: 'MBA: Finance',
+    date: '2023 \u2014 2025',
+    bullets: [
+      'Conducted feasibility analysis for a <strong>&#8377;900Cr+</strong> project using CCA, DCF, and NPV models in Excel.',
+      'Won <strong>1st place</strong> in a national business case competition \u2014 AI/ML-enabled gamified coaching platform with a 5-year financial &amp; market strategy.',
+      'Analysed an ESG-augmented Fama-French 5-factor model; identified Governance factors as significant predictors of equity returns.'
+    ]
+  },
+  {
+    type: 'done',
+    icon: '\u{1F3E6}',
+    city: 'India (Online)',
+    org: 'Indian Institute of Banking &amp; Finance',
+    role: 'Diploma in Banking &amp; Finance',
+    date: '2024 \u2014 2025',
+    bullets: [
+      'Studied the <strong>Indian Financial System</strong> \u2014 structure of financial markets, RBI\'s role as central bank and regulator, monetary policy transmission, and CRR/SLR mechanics.',
+      'Covered <strong>principles &amp; practices of banking</strong> \u2014 how commercial banks operate, credit creation, types of accounts, KYC/AML compliance, and NPA management.',
+      'Learned <strong>accounting &amp; financial management for bankers</strong> \u2014 balance sheet analysis, capital adequacy (Basel norms), and liquidity management.',
+      'Studied <strong>retail banking &amp; wealth management</strong> \u2014 retail lending products, priority sector lending, mutual funds, insurance products, and investment advisory frameworks.'
+    ]
+  },
+  {
+    type: 'done',
+    icon: '\u{1F4D0}',
+    city: 'Aligarh, Uttar Pradesh',
+    org: 'Aligarh Muslim University',
+    role: 'BSc Mathematics with Statistics',
+    date: '2020 \u2014 2023',
+    bullets: [
+      'Built a strong foundation in statistical analysis, probability theory, and hypothesis testing.',
+      'Developed core quantitative skills applied throughout career in A/B testing and data modelling.'
+    ]
+  }
+];
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target;
-      if (el.classList.contains('skill-bar-fill')) el.style.width = el.dataset.width + '%';
-      if (el.dataset.target) animateCounter(el);
-      if (el.classList.contains('tl-item') || el.classList.contains('edu-card')) el.classList.add('visible');
-      if (el.id === 'cfaHero') el.classList.add('visible');
-      observer.unobserve(el);
-    });
-  }, { threshold: 0.15 });
+/* ==============================================
+   JOURNEY MAP BUILDER
+   FIX: SVG path now uses canvas-relative % coords
+        that match the card % positions exactly.
+   ============================================== */
+function buildJourneyMap(canvasId, svgId, stops) {
+  var canvas = document.getElementById(canvasId);
+  var svg    = document.getElementById(svgId);
 
-  bars.forEach(b => observer.observe(b));
-  statsNums.forEach(n => observer.observe(n));
-  animElems.forEach(t => observer.observe(t));
-  if (cfaHero) observer.observe(cfaHero);
+  /* Guard: if elements don't exist, bail out cleanly */
+  if (!canvas || !svg) {
+    console.warn('buildJourneyMap: element not found', canvasId, svgId);
+    return;
+  }
 
-  /* ── Keyboard support for flip cards ── */
-  document.querySelectorAll('.cert-flip-card').forEach(card => {
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.click();
-      }
-    });
+  var canvasH = parseInt(canvas.style.height, 10) || 680;
+  var W       = 560;
+  var n       = stops.length;
+  var topPad  = 60;
+  var stepY   = (canvasH - topPad - 40) / (n - 1);
+
+  /* X positions: snake left/right */
+  var xLeft  = 130;
+  var xRight = 430;
+
+  /* Compute pixel positions (used for SVG), then convert to % for CSS */
+  var pts = stops.map(function(s, i) {
+    var y = topPad + i * stepY;
+    var x = (i % 2 === 0) ? xRight : xLeft;
+    return { x: x, y: y };
   });
 
-  /* ── Certificate Modal ── */
-  function openCertModal(url, type, title) {
-    const overlay = document.getElementById('certModal');
-    const frame   = document.getElementById('certModalFrame');
-    const img     = document.getElementById('certModalImg');
-    const label   = document.getElementById('certModalTitle');
+  /* ── Draw SVG path (viewBox matches pixel coords) ── */
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + canvasH);
 
-    label.textContent = title || 'Certificate';
+  var d = 'M ' + pts[0].x + ' ' + pts[0].y;
+  for (var i = 1; i < pts.length; i++) {
+    var p   = pts[i - 1];
+    var c   = pts[i];
+    var midY = (p.y + c.y) / 2;
+    d += ' C ' + p.x + ' ' + midY + ' ' + c.x + ' ' + midY + ' ' + c.x + ' ' + c.y;
+  }
 
-    if (type === 'pdf') {
-      frame.src = url;
-      frame.style.display = 'block';
-      img.style.display = 'none';
+  /* Glow path */
+  var glow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  glow.setAttribute('d', d);
+  glow.setAttribute('fill', 'none');
+  glow.setAttribute('stroke', 'rgba(201,168,76,0.12)');
+  glow.setAttribute('stroke-width', '10');
+  glow.setAttribute('stroke-linecap', 'round');
+  svg.appendChild(glow);
+
+  /* Dashed path */
+  var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', d);
+  path.setAttribute('fill', 'none');
+  path.setAttribute('stroke', 'rgba(201,168,76,0.35)');
+  path.setAttribute('stroke-width', '3');
+  path.setAttribute('stroke-dasharray', '9 7');
+  path.setAttribute('stroke-linecap', 'round');
+  svg.appendChild(path);
+
+  /* Connector dots on path */
+  pts.forEach(function(pt) {
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', pt.x);
+    circle.setAttribute('cy', pt.y);
+    circle.setAttribute('r', '5');
+    circle.setAttribute('fill', 'var(--gold)');
+    circle.setAttribute('stroke', 'var(--bg)');
+    circle.setAttribute('stroke-width', '2');
+    svg.appendChild(circle);
+  });
+
+  /* ── Place stop cards using % positions ── */
+  stops.forEach(function(stop, i) {
+    var x = pts[i].x;
+    var y = pts[i].y;
+
+    /* FIX: Use % so cards align with SVG path at any container width */
+    var pctX = (x / W * 100).toFixed(2) + '%';
+    var pctY = (y / canvasH * 100).toFixed(2) + '%';
+
+    var el = document.createElement('div');
+    el.className = 'jstop';
+    el.style.left = pctX;
+    el.style.top  = pctY;
+
+    var card = document.createElement('div');
+    var cardClass;
+    if (stop.type === 'active') {
+      cardClass = 'jstop-card active-card';
+    } else if (stop.type === 'tbd') {
+      cardClass = 'jstop-card tbd-card';
     } else {
-      img.src = url;
-      img.style.display = 'block';
-      frame.style.display = 'none';
-      frame.src = '';
+      cardClass = 'jstop-card';
+    }
+    card.className = cardClass;
+
+    if (stop.type === 'tbd') {
+      card.innerHTML = '<div class="jstop-icon">\u{1F52E}</div><div class="jstop-tbd-label">Coming Soon</div>';
+    } else {
+      card.innerHTML =
+        '<div class="jstop-icon">' + stop.icon + '</div>' +
+        '<div class="jstop-city"><span class="jstop-city-dot"></span>' + stop.city + '</div>' +
+        '<div class="jstop-org">' + stop.org + '</div>' +
+        '<div class="jstop-role">' + stop.role + '</div>' +
+        '<div class="jstop-date">' + stop.date + '</div>';
+
+      /* FIX: use closure to capture stop correctly */
+      (function(s) {
+        card.addEventListener('click', function() { openJourneyModal(s); });
+      }(stop));
     }
 
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeCertModal() {
-    const overlay = document.getElementById('certModal');
-    const frame   = document.getElementById('certModalFrame');
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    setTimeout(() => { frame.src = ''; }, 350);
-  }
-
-  function handleModalClick(e) {
-    if (e.target === document.getElementById('certModal')) closeCertModal();
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeCertModal();
+    el.appendChild(card);
+    canvas.appendChild(el);
   });
+}
+
+/* ==============================================
+   JOURNEY MODAL
+   ============================================== */
+function openJourneyModal(stop) {
+  var titleEl = document.getElementById('journeyModalTitle');
+  var bodyEl  = document.getElementById('journeyModalBody');
+  var modal   = document.getElementById('journeyModal');
+  if (!titleEl || !bodyEl || !modal) { return; }
+
+  titleEl.textContent = stop.org.replace(/&amp;/g, '&');
+
+  var html = '';
+  html += '<div class="modal-city"><span class="modal-city-dot"></span>' + stop.city + '</div>';
+  html += '<div class="modal-org">'  + stop.org  + '</div>';
+  html += '<div class="modal-role">' + stop.role + '</div>';
+  html += '<div class="modal-date">' + stop.date + '</div>';
+  html += '<div class="modal-divider"></div>';
+  html += '<ul class="modal-bullets">';
+  stop.bullets.forEach(function(b) { html += '<li>' + b + '</li>'; });
+  html += '</ul>';
+
+  bodyEl.innerHTML = html;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeJourneyModal() {
+  var modal = document.getElementById('journeyModal');
+  if (modal) { modal.classList.remove('open'); }
+  document.body.style.overflow = '';
+}
+
+function handleJourneyBackdropClick(e) {
+  if (e.target === document.getElementById('journeyModal')) {
+    closeJourneyModal();
+  }
+}
+
+/* ==============================================
+   CERT MODAL
+   ============================================== */
+function openCertModal(url, type, title) {
+  var overlay = document.getElementById('certModal');
+  var frame   = document.getElementById('certModalFrame');
+  var img     = document.getElementById('certModalImg');
+  var titleEl = document.getElementById('certModalTitle');
+  if (!overlay || !frame || !img || !titleEl) { return; }
+
+  titleEl.textContent = title || 'Certificate';
+  if (type === 'pdf') {
+    frame.src = url;
+    frame.style.display = 'block';
+    img.style.display = 'none';
+  } else {
+    img.src = url;
+    img.style.display = 'block';
+    frame.style.display = 'none';
+    frame.src = '';
+  }
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCertModal() {
+  var overlay = document.getElementById('certModal');
+  var frame   = document.getElementById('certModalFrame');
+  if (overlay) { overlay.classList.remove('open'); }
+  document.body.style.overflow = '';
+  setTimeout(function() { if (frame) { frame.src = ''; } }, 350);
+}
+
+function handleCertModalClick(e) {
+  if (e.target === document.getElementById('certModal')) { closeCertModal(); }
+}
+
+/* ==============================================
+   SKILL BARS & COUNTERS  (IntersectionObserver)
+   ============================================== */
+var ioObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (!entry.isIntersecting) { return; }
+    var el = entry.target;
+
+    if (el.classList.contains('skill-bar-fill')) {
+      el.style.width = el.dataset.width + '%';
+    }
+
+    if (el.dataset.target) {
+      var target = Number(el.dataset.target);
+      var count  = 0;
+      var step   = target / 50;
+      var timer  = setInterval(function() {
+        count = Math.min(count + step, target);
+        el.textContent = Math.round(count);
+        if (count >= target) { clearInterval(timer); }
+      }, 28);
+    }
+
+    if (el.id === 'cfaHero') {
+      el.classList.add('visible');
+    }
+
+    ioObserver.unobserve(el);
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.skill-bar-fill').forEach(function(bar) {
+  ioObserver.observe(bar);
+});
+document.querySelectorAll('.stat-num[data-target]').forEach(function(num) {
+  ioObserver.observe(num);
+});
+var cfaHeroEl = document.getElementById('cfaHero');
+if (cfaHeroEl) { ioObserver.observe(cfaHeroEl); }
+
+/* ==============================================
+   KEYBOARD HANDLERS
+   ============================================== */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeJourneyModal(); closeCertModal(); }
+});
+document.querySelectorAll('.cert-flip-card').forEach(function(card) {
+  card.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.click();
+    }
+  });
+});
+
+/* ==============================================
+   INIT — build both journey maps
+   ============================================== */
+buildJourneyMap('expCanvas', 'expSvg', EXP_STOPS);
+buildJourneyMap('eduCanvas', 'eduSvg', EDU_STOPS);
 </script>
 </body>
 </html>
