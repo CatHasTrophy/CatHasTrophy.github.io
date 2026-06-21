@@ -20,7 +20,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { height: 100%; }
+  html { height: 100%; overflow-x: hidden; }
 
   body {
     background: var(--bg);
@@ -28,10 +28,14 @@
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     line-height: 1.7;
-    overflow: hidden;   /* no page scroll — sections handle their own scroll */
-    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;   /* no page scroll — sections handle their own scroll */
+    height: 100vh;                          /* fallback for older browsers */
+    height: calc(var(--vh, 1vh) * 100);     /* JS-corrected mobile viewport */
+    height: 100dvh;                         /* modern dynamic viewport unit */
     display: flex;
     flex-direction: column;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* ─── NAV ─────────────────────────────────────── */
@@ -76,6 +80,31 @@
   .nav-links a:hover { color: var(--gold); }
   .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
 
+  .nav-toggle {
+    display: none;
+    width: 30px;
+    height: 30px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 210;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--gold);
+    transition: transform .25s ease, opacity .2s ease;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
   /* ─── STAGE ───────────────────────────────────── */
   .stage {
     flex: 1;
@@ -88,6 +117,7 @@
     position: absolute;
     inset: 0;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     opacity: 0;
     pointer-events: none;
     transform: translateY(12px);
@@ -502,18 +532,46 @@
     .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
   }
   @media (max-width: 768px) {
-    nav { padding: 0 1.5rem; }
-    .nav-links a { padding: 0 .7rem; font-size: .65rem; }
+    nav { padding: 0 1.25rem; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 58px;
+      left: 0;
+      right: 0;
+      z-index: 199;
+      flex-direction: column;
+      background: rgba(12,14,18,0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
+    .nav-links.open { max-height: 420px; }
+    .nav-links a {
+      height: auto;
+      line-height: 1;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      border-left: 2px solid transparent;
+    }
+    .nav-links a.active { border-bottom-color: var(--border); border-left-color: var(--gold); background: rgba(201,168,76,.06); }
     .page-inner { padding: 2.5rem 1.5rem; }
     .hero-stats { grid-template-columns: 1fr; }
     .cert-flip-grid { grid-template-columns: 1fr 1fr; }
     .journey-canvas { max-width: 100%; }
     .jstop-card { width: 150px; }
+    .cfa-actions { flex-wrap: wrap; row-gap: .7rem; }
   }
   @media (max-width: 480px) {
     .cert-flip-grid { grid-template-columns: 1fr; }
-    .jstop-card { width: 135px; }
-    .nav-links a { letter-spacing: .05em; padding: 0 .5rem; }
+    .jstop-card { width: 135px; padding: .7rem .8rem .65rem; }
+    .nav-links a { letter-spacing: .05em; }
+    .modal-backdrop, .cert-modal-overlay { padding: 1rem; }
+    .cfa-hero { padding: 1.6rem 1.4rem; }
+    .cert-flip-card { height: 140px; }
+    .contact-item { padding: .85rem 1rem; }
   }
 </style>
 </head>
@@ -522,7 +580,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo" onclick="showPage('home')">Talha</div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="#" data-page="home"    class="active">Home</a></li>
     <li><a href="#" data-page="experience">Experience</a></li>
     <li><a href="#" data-page="skills">Skills</a></li>
@@ -530,6 +588,9 @@
     <li><a href="#" data-page="certifications">Certifications</a></li>
     <li><a href="#" data-page="contact">Contact</a></li>
   </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- STAGE -->
@@ -812,6 +873,39 @@
 
 <script>
 /* =============================================
+   MOBILE VIEWPORT HEIGHT FIX
+   (keeps full-height layout accurate on phones
+   where the browser chrome resizes the viewport)
+   ============================================= */
+function setViewportHeightVar() {
+  document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+}
+setViewportHeightVar();
+window.addEventListener('resize', setViewportHeightVar);
+window.addEventListener('orientationchange', setViewportHeightVar);
+
+/* =============================================
+   MOBILE NAV TOGGLE
+   ============================================= */
+var navToggleBtn = document.getElementById('navToggle');
+var navLinksEl   = document.getElementById('navLinks');
+
+function closeMobileNav() {
+  if (!navLinksEl || !navToggleBtn) { return; }
+  navLinksEl.classList.remove('open');
+  navToggleBtn.classList.remove('open');
+  navToggleBtn.setAttribute('aria-expanded', 'false');
+}
+
+if (navToggleBtn) {
+  navToggleBtn.addEventListener('click', function() {
+    var isOpen = navLinksEl.classList.toggle('open');
+    navToggleBtn.classList.toggle('open', isOpen);
+    navToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+}
+
+/* =============================================
    DATA
    ============================================= */
 var EXP_STOPS = [
@@ -921,6 +1015,9 @@ function showPage(name) {
 
   /* trigger counters if going home */
   if (name === 'home') { animateCounters(); }
+
+  /* always collapse the mobile menu on navigation */
+  closeMobileNav();
 }
 
 /* bind nav links */
@@ -1126,7 +1223,7 @@ function animateCounters() {
    KEYBOARD
    ============================================= */
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closeJourneyModal(); closeCertModal(); }
+  if (e.key === 'Escape') { closeJourneyModal(); closeCertModal(); closeMobileNav(); }
 });
 document.querySelectorAll('.cert-flip-card').forEach(function(card) {
   card.addEventListener('keydown', function(e) {
@@ -1143,3 +1240,4 @@ animateCounters(); /* home is active on load */
 </script>
 </body>
 </html>
+
